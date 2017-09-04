@@ -94,7 +94,7 @@ public class Principal extends JFrame {
 	}
 
 	private JPanel constroiFase() throws IOException {
-		Fase fase = new Fase();
+		Fase fase = new Fase(1);
 		add(fase); 
 		return fase;
 

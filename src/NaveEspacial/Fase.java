@@ -26,13 +26,16 @@ import javax.swing.Timer;
 public  class Fase extends JPanel implements ActionListener {  
 	//plano de fundo da fase
 	private Image fundo;
+        private Boolean NaveMexer;
+        private Boolean Finalfase;
+        private boolean colisao;
 	//objeto nave
 	private Nave nave;
         private Telainicial tela;
 	//variavel para velocidade do jogo
 	private Timer timer;
 	//lista de inimigos
-	private List<Inimigo> inimigos;	
+	private List<Inimigo> inimigos = new ArrayList<>();
 
     public Nave getNave() {
         return nave;
@@ -99,7 +102,11 @@ public  class Fase extends JPanel implements ActionListener {
         private String MSG_QUAL_NOME = "Parabéns seu Recorde esta entre os dez melhores!!\n qual é seu nome?";
        
 	//iniciando o construtor da fase
-	public Fase( ) throws IOException {
+        public Fase(){
+        
+        
+        }
+	public Fase( int comecar) throws IOException {
 		//focus direto na fase
 		setFocusable(true);
 		setDoubleBuffered(true);
@@ -109,12 +116,12 @@ public  class Fase extends JPanel implements ActionListener {
                 ImageIcon referencia = new ImageIcon("imagem/fundo000.png");
 		fundo = referencia.getImage();
 		//inciando o objeto nave
-		nave = new Nave(1,150);
+		nave = new Nave();
                 tela = new Telainicial();
 		//dizendo que o jogo começou
 		emJogo = true;
 		//carregando os inimigos
-		inicializaInimigos(10,"imagem/inimigo_2.png","imagem/inimigo_2.png");
+		inicializaInimigos(8,"imagem/inimigo_2.png","imagem/inimigo_2.png");
 		//definindo delay jogo
 		timer = new Timer(10, this);
 		//iniciando
@@ -135,7 +142,7 @@ public  class Fase extends JPanel implements ActionListener {
  
 	//metodo para iniciar os inimigos, nas coordenadas geradas
 	public void inicializaInimigos(int n,String inimigo1, String inimigo2) {
-		inimigos = new ArrayList<>();
+		
 		for (int i = 0; i < n; i++) {
                        if (i ==10){
                            limite =1500;
@@ -192,7 +199,7 @@ public  class Fase extends JPanel implements ActionListener {
                         graficos.setColor(Color.white);
 			graficos.drawString("Inimigos: " + inimigos.size(), 5, 15);
                         graficos.drawString("vidas: " + this.vidas, 100, 15);
-                        graficos.drawString("tiro especial: " + nave.tiroespecial, 175, 15);
+                        graficos.drawString("tiro especial: " + nave.getTiroespecial(), 175, 15);
                         graficos.drawString("Fase Atual: " + this.fase, 300, 15);
                         graficos.drawString("Dificuldade: " + this.dificuldade,400, 15);
                         graficos.drawString("record: " + this.record, 500, 15);
@@ -248,10 +255,11 @@ public  class Fase extends JPanel implements ActionListener {
 			}
 		}
 		//faz a nave se mecher
-		nave.mexer();
+		NaveMexer = nave.mexer();
 		//checa as colisões
-		checarColisoes();
-                chegarfinal(cont);
+		colisao =checarColisoes();
+                DestruirInimigos();
+                Finalfase=chegarfinal(cont);
 		//repinta a tela
 		repaint();
                 if(!emJogo){
@@ -273,7 +281,8 @@ public  class Fase extends JPanel implements ActionListener {
         }
         
    
-        public boolean chegarfinal(int cont){
+        public boolean chegarfinal(int a){
+            cont=a;
             if (cont==1){
             this.fase = 1;
             }
@@ -281,34 +290,34 @@ public  class Fase extends JPanel implements ActionListener {
         if (inimigos.size() == 0 ) {
              vidas++;
              cont++;
-             nave.tiroespecial= nave.tiroespecial +5;
+             nave.AddTiroespecial();
              this.fase ++;
              
              if (cont < 5){
-                   inicializaInimigos(4*cont,"imagem/inimigo_2.png","imagem/inimigo_2.png");
+                   inicializaInimigos(10*cont,"imagem/inimigo_2.png","imagem/inimigo_2.png");
 
              }
              if (cont>=5 && cont< 10) {
-                   inicializaInimigos(4*cont,"imagem/inimigo_2.png","imagem/inimigo_2.png");
+                   inicializaInimigos(10*cont,"imagem/inimigo_2.png","imagem/inimigo_2.png");
                    dificuldade=2;
                    ImageIcon referencia = new ImageIcon("imagem/fundo01.png");
 		   fundo = referencia.getImage();
                 
                }
              if (cont>=10 && cont<15) {
-                    inicializaInimigos(4*cont,"imagem/inimigo_2.png","imagem/inimigo_1.png");
+                    inicializaInimigos(10*cont,"imagem/inimigo_2.png","imagem/inimigo_1.png");
                     dificuldade=2;
                     ImageIcon referencia = new ImageIcon("imagem/fundo02.png");
 		    fundo = referencia.getImage();
                }
              if (cont>= 15 && cont<20) {
-                    inicializaInimigos(4*cont,"imagem/inimigo_1.png","imagem/inimigo_3.png");
+                    inicializaInimigos(10*cont,"imagem/inimigo_1.png","imagem/inimigo_3.png");
                     dificuldade=3;
                     ImageIcon referencia = new ImageIcon("imagem/fundo03.png");
 		    fundo = referencia.getImage();
                }
                if (cont >=20){
-                   inicializaInimigos(4*cont,"imagem/inimigo_3.png","imagem/inimigo_4.png");
+                   inicializaInimigos(10*cont,"imagem/inimigo_3.png","imagem/inimigo_4.png");
                    ImageIcon referencia = new ImageIcon("imagem/fundo04.png");
 		   fundo = referencia.getImage();
                    dificuldade=4;
@@ -320,26 +329,33 @@ public  class Fase extends JPanel implements ActionListener {
         return true;
         
         }
-	public boolean checarColisoes() {
+	public Boolean checarColisoes() {
 	//capturando as formas  dos objetos
 		Rectangle formaNave = nave.getBounds();
 		Rectangle formaInimigo;
-		Rectangle formaMissel;
 		for (int i = 0; i < inimigos.size(); i++) {
 			Inimigo tempInimigo = inimigos.get(i);
 			formaInimigo = tempInimigo.getBounds();
 			//caso a nave tope em algum inimigo, some os dois e o jogo acaba 
 			if (formaNave.intersects(formaInimigo)) {
                                 dificuldade=1;
+                                cont=1;
+                               fase=1;
+                                inimigos.clear();
 				emJogo = false;
                               return emJogo;
 			}
                         
 		}
-
 		//carregando lista de misseis
-		List<Missel> misseis = nave.getMisseis();
 
+              return emJogo;
+	}
+        private Boolean DestruirInimigos(){
+            Boolean destruir = false;
+                Rectangle formaInimigo;
+		Rectangle formaMissel;
+        		List<Missel> misseis = nave.getMisseis();
 		//para cada missel gerado
 		for (int i = 0; i < misseis.size(); i++) {
 			Missel tempMissel = misseis.get(i);
@@ -357,13 +373,14 @@ public  class Fase extends JPanel implements ActionListener {
                                         record = record + dificuldade*100;
 					tempInimigo.setVisible(false);
 					tempMissel.setVisible(false);
+                                        destruir =true;
 				}
 
 			}
 
 		}
-              return emJogo;
-	}
+        return destruir;
+        }
 
 	//metodos do teclado.
 	private class TecladoAdapter extends KeyAdapter {
@@ -378,7 +395,7 @@ public  class Fase extends JPanel implements ActionListener {
                             }
                             emJogo = true;
                             record =0;
-                            nave = new Nave(1,150);
+                           nave = new Nave();
                             inicializaInimigos(10,"imagem/inimigo_2.png","imagem/inimigo_2.png");
                             dificuldade=1;
                             vidas = 5;
@@ -399,7 +416,8 @@ public  class Fase extends JPanel implements ActionListener {
 
 	}
 
-      public void salvaarquivo() throws IOException{
+      public int salvaarquivo() throws IOException{
+          int posicao=999;
          FileWriter fw = new FileWriter(new File("Record.txt"),false); 
          BufferedWriter bfw = new BufferedWriter(fw);
         for(int i=1;i<20;i=i+2){
@@ -417,6 +435,8 @@ public  class Fase extends JPanel implements ActionListener {
        
         }
  
-            bfw.close();          
+            bfw.close();  
+             return posicao;
         }
+     
 }

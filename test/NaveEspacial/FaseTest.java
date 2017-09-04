@@ -5,22 +5,23 @@
  */
 package NaveEspacial;
 
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
- * @author lucas
+ * @author Brenno
  */
 public class FaseTest {
     
@@ -44,369 +45,141 @@ public class FaseTest {
     }
 
     /**
-     * Test of getNave method, of class Fase.
+     * Test of getBounds method, of class Movimentavel.
      */
-    @Test
-    public void testGetNave() {
-        try {
-            System.out.println("getNave");
-            Fase instance = new Fase();
-            Nave expResult = null;
-            Nave result = instance.getNave();
-            assertEquals(expResult, result);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+ 
+        Nave mock1 = null;
+	
 
-    /**
-     * Test of setNave method, of class Fase.
-     */
-    @Test
-    public void testSetNave() {
-        try {
-            System.out.println("setNave");
-            Nave nave = null;
-            Fase instance = new Fase();
-            instance.setNave(nave);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+	@Before
+	public void inicializa() {
+		//Criando os Mocks
+		mock1= EasyMock.createMock(Nave.class);
+                
+	}
 
-    /**
-     * Test of getInimigos method, of class Fase.
-     */
-    @Test
-    public void testGetInimigos() {
-        try {
-            System.out.println("getInimigos");
-            Fase instance = new Fase();
-            List<Inimigo> expResult = null;
-            List<Inimigo> result = instance.getInimigos();
-            assertEquals(expResult, result);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+  
+	@Test
+	public void chegarFinalTestPrimeirafaseCom1inimigo() throws IOException{
+                Fase fase = new Fase(); 
+             
+               Inimigo inimigo=  new Inimigo(100, 200,"imagem/inimigo_2.png","imagem/inimigo_2.png");
+                List<Inimigo> inimigos= new ArrayList<>();
+                inimigos.add(inimigo);
+                EasyMock.expect(mock1.getTiroespecial()).andReturn(15); 
+                EasyMock.expect(mock1.AddTiroespecial()).andReturn(true);
+		EasyMock.replay(mock1);
+                fase.setNave(mock1);
+                fase.getInimigos().add(inimigo);                
+               assertTrue(fase.chegarfinal(1));
+            
+	}
+    
+        @Test
+	public void chegarFinalTest3faseCom0inimigo() throws IOException{
+	 /* Missel missil=new Missel(100,100);
+                List<Missel> misseis= new ArrayList<>();
+                misseis.add(missil);
+                EasyMock.expect(mock1.getMisseis()).andReturn(misseis);*/
+                  
+               Fase fase = new Fase(); 
+           
+               Inimigo inimigo=  new Inimigo(100, 200,"imagem/inimigo_2.png","imagem/inimigo_2.png");
+               List<Inimigo> inimigos= new ArrayList<>();
+                //inimigos.add(inimigo);
+                EasyMock.expect(mock1.getTiroespecial()).andReturn(15); 
+                EasyMock.expect(mock1.AddTiroespecial()).andReturn(true); 
+		EasyMock.replay(mock1);
+                fase.setNave(mock1);
+                fase.getInimigos().clear();
+                
+                
+             assertFalse(fase.chegarfinal(3));
+            
+	}
+        
+             @Test
+	public void chegarFinalTest6faseCom0inimigo() throws IOException{
+	 /* Missel missil=new Missel(100,100);
+                List<Missel> misseis= new ArrayList<>();
+                misseis.add(missil);
+                EasyMock.expect(mock1.getMisseis()).andReturn(misseis);*/
+                  
+               Fase fase = new Fase();    
+               
+               Inimigo inimigo=  new Inimigo(100, 200,"imagem/inimigo_2.png","imagem/inimigo_2.png");
+               List<Inimigo> inimigos= new ArrayList<>();
+                //inimigos.add(inimigo);
+                EasyMock.expect(mock1.getTiroespecial()).andReturn(15); 
+                EasyMock.expect(mock1.AddTiroespecial()).andReturn(true); 
+		EasyMock.replay(mock1);
+                fase.setNave(mock1);
+                fase.getInimigos().clear();    
+             assertFalse(fase.chegarfinal(6));
+            
+	}
+        
+        @Test
+	public void chegarFinalTest11faseCom0inimigo() throws IOException{
+	 /* Missel missil=new Missel(100,100);
+                List<Missel> misseis= new ArrayList<>();
+                misseis.add(missil);
+                EasyMock.expect(mock1.getMisseis()).andReturn(misseis);*/
+                  
+               Fase fase = new Fase();   
+       
+               Inimigo inimigo=  new Inimigo(100, 200,"imagem/inimigo_2.png","imagem/inimigo_2.png");
+               List<Inimigo> inimigos= new ArrayList<>();
+                //inimigos.add(inimigo);
+                EasyMock.expect(mock1.getTiroespecial()).andReturn(15); 
+                EasyMock.expect(mock1.AddTiroespecial()).andReturn(true); 
+		EasyMock.replay(mock1);
+                fase.setNave(mock1);
+                fase.getInimigos().clear();    
+             assertFalse(fase.chegarfinal(11));
+            
+	}
 
-    /**
-     * Test of setInimigos method, of class Fase.
-     */
-    @Test
-    public void testSetInimigos() {
-        try {
-            System.out.println("setInimigos");
-            List<Inimigo> inimigos = null;
-            Fase instance = new Fase();
-            instance.setInimigos(inimigos);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of isEmJogo method, of class Fase.
-     */
-    @Test
-    public void testIsEmJogo() {
-        try {
-            System.out.println("isEmJogo");
-            Fase instance = new Fase();
-            boolean expResult = false;
-            boolean result = instance.isEmJogo();
-            assertEquals(expResult, result);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of setEmJogo method, of class Fase.
-     */
-    @Test
-    public void testSetEmJogo() {
-        try {
-            System.out.println("setEmJogo");
-            boolean emJogo = false;
-            Fase instance = new Fase();
-            instance.setEmJogo(emJogo);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of getDificuldade method, of class Fase.
-     */
-    @Test
-    public void testGetDificuldade() {
-        try {
-            System.out.println("getDificuldade");
-            Fase instance = new Fase();
-            int expResult = 0;
-            int result = instance.getDificuldade();
-            assertEquals(expResult, result);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of setDificuldade method, of class Fase.
-     */
-    @Test
-    public void testSetDificuldade() {
-        try {
-            System.out.println("setDificuldade");
-            int dificuldade = 0;
-            Fase instance = new Fase();
-            instance.setDificuldade(dificuldade);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of getVidas method, of class Fase.
-     */
-    @Test
-    public void testGetVidas() {
-        try {
-            System.out.println("getVidas");
-            Fase instance = new Fase();
-            int expResult = 0;
-            int result = instance.getVidas();
-            assertEquals(expResult, result);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of setVidas method, of class Fase.
-     */
-    @Test
-    public void testSetVidas() {
-        try {
-            System.out.println("setVidas");
-            int vidas = 0;
-            Fase instance = new Fase();
-            instance.setVidas(vidas);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of getFase method, of class Fase.
-     */
-    @Test
-    public void testGetFase() {
-        try {
-            System.out.println("getFase");
-            Fase instance = new Fase();
-            int expResult = 0;
-            int result = instance.getFase();
-            assertEquals(expResult, result);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of setFase method, of class Fase.
-     */
-    @Test
-    public void testSetFase() {
-        try {
-            System.out.println("setFase");
-            int fase = 0;
-            Fase instance = new Fase();
-            instance.setFase(fase);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of rand1 method, of class Fase.
-     */
-    @Test
-    public void testRand1() {
-        try {
-            System.out.println("rand1");
-            int limite = 0;
-            Fase instance = new Fase();
-            int expResult = 0;
-            int result = instance.rand1(limite);
-            assertEquals(expResult, result);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of rand2 method, of class Fase.
-     */
-    @Test
-    public void testRand2() {
-        try {
-            System.out.println("rand2");
-            Fase instance = new Fase();
-            int expResult = 0;
-            int result = instance.rand2();
-            assertEquals(expResult, result);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of inicializaInimigos method, of class Fase.
-     */
-    @Test
-    public void testInicializaInimigos() {
-        try {
-            System.out.println("inicializaInimigos");
-            int n = 0;
-            String inimigo1 = "";
-            String inimigo2 = "";
-            Fase instance = new Fase();
-            instance.inicializaInimigos(n, inimigo1, inimigo2);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of gameover method, of class Fase.
-     */
-    @Test
-    public void testGameover() {
-        try {
-            System.out.println("gameover");
-            Graphics g = null;
-            Fase instance = new Fase();
-            instance.gameover(g);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of paint method, of class Fase.
-     */
-    @Test
-    public void testPaint() {
-        try {
-            System.out.println("paint");
-            Graphics g = null;
-            Fase instance = new Fase();
-            instance.paint(g);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of actionPerformed method, of class Fase.
-     */
-    @Test
-    public void testActionPerformed() {
-        try {
-            System.out.println("actionPerformed");
-            ActionEvent e = null;
-            Fase instance = new Fase();
-            instance.actionPerformed(e);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of chegarfinal method, of class Fase.
-     */
-    @Test
-    public void testChegarfinal() {
-        try {
-            System.out.println("chegarfinal");
-            int cont = 0;
-            Fase instance = new Fase();
-            boolean expResult = false;
-            boolean result = instance.chegarfinal(cont);
-            assertEquals(expResult, result);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of checarColisoes method, of class Fase.
-     */
-    @Test
-    public void testChecarColisoes() {
-        try {
-            System.out.println("checarColisoes");
-            Fase instance = new Fase();
-            Boolean expResult = null;
-            Boolean result = instance.checarColisoes();
-            assertEquals(expResult, result);
-            // TODO review the generated test code and remove the default call to fail.
-            fail("The test case is a prototype.");
-        } catch (IOException ex) {
-            Logger.getLogger(FaseTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    /**
-     * Test of salvaarquivo method, of class Fase.
-     */
-    @Test
-    public void testSalvaarquivo() throws Exception {
-        System.out.println("salvaarquivo");
-        Fase instance = new Fase();
-        instance.salvaarquivo();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+            @Test
+	public void chegarFinalTest16faseCom0inimigo() throws IOException{
+	 /* Missel missil=new Missel(100,100);
+                List<Missel> misseis= new ArrayList<>();
+                misseis.add(missil);
+                EasyMock.expect(mock1.getMisseis()).andReturn(misseis);*/
+                  
+               Fase fase = new Fase();  
+               
+               Inimigo inimigo=  new Inimigo(100, 200,"imagem/inimigo_2.png","imagem/inimigo_2.png");
+               List<Inimigo> inimigos= new ArrayList<>();
+                //inimigos.add(inimigo);
+                EasyMock.expect(mock1.getTiroespecial()).andReturn(15); 
+                EasyMock.expect(mock1.AddTiroespecial()).andReturn(true); 
+		EasyMock.replay(mock1);
+                fase.setNave(mock1);
+                fase.getInimigos().clear();    
+             assertFalse(fase.chegarfinal(16));
+            
+	}
+        
+        @Test
+	public void chegarFinalTest21faseCom0inimigo() throws IOException{
+	 /* Missel missil=new Missel(100,100);
+                List<Missel> misseis= new ArrayList<>();
+                misseis.add(missil);
+                EasyMock.expect(mock1.getMisseis()).andReturn(misseis);*/     
+                Fase fase = new Fase(); 
+              
+                Inimigo inimigo=  new Inimigo(100, 200,"imagem/inimigo_2.png","imagem/inimigo_2.png");
+                List<Inimigo> inimigos= new ArrayList<>();
+                //inimigos.add(inimigo);
+                EasyMock.expect(mock1.getTiroespecial()).andReturn(15); 
+                EasyMock.expect(mock1.AddTiroespecial()).andReturn(true); 
+		EasyMock.replay(mock1);
+                fase.setNave(mock1);
+                fase.getInimigos().clear();    
+                assertFalse(fase.chegarfinal(21));
+            
+	}
+  
     
 }

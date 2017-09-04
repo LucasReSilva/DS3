@@ -8,12 +8,12 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-public class Nave extends Movimentavel{
+public class NaveOriginal extends Movimentavel{
 
 	private int dx, dy;
 	//Uma nave contem um array de misseis
 	private List<Missel> misseis;
-        private List<Nave> nave;
+        private List<NaveInterface> nave;
         public int tiroespecial =50;
 
     public int getTiroespecial() {
@@ -25,7 +25,7 @@ public class Nave extends Movimentavel{
         return true;
     }
 
-	public Nave() {
+	public NaveOriginal() {
 		
 		//carregando a imagem da nave
 		ImageIcon referencia = new ImageIcon("imagem/nave.png");
