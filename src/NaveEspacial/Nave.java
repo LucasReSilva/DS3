@@ -37,26 +37,32 @@ public class Nave extends Movimentavel{
 	}
 
 	//metodo para a nave não sair da tela
-	public void mexer() {
+	public Boolean mexer() {
 		x += dx;
 		y += dy;
+                
+                Boolean movimentoValido;
+                movimentoValido = true;
 
 		if (this.x < 1) {
 			this.x = 1;
+                        movimentoValido = false;
 		}
 		if (this.x > 700) {
 			this.x = 1;
-
+                        movimentoValido = false;
 		}
 
 		if (this.y < 1) {
 			this.y = 1;
+                        movimentoValido = false;
 		}
 
 		if (this.y > 460) {
 			this.y = 460;
+                        movimentoValido = false;
 		}
-
+                return movimentoValido;
 	}
 
 	/*metodo para atirar, aqui é criado um novo missel, e adicionado no array da nave, passando
