@@ -37,7 +37,7 @@ public class Nave extends Movimentavel{
 	}
 
 	//metodo para a nave não sair da tela
-	public Boolean mexer() {
+	public boolean mexer() {
 		x += dx;
 		y += dy;
                 

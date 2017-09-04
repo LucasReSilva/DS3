@@ -320,7 +320,7 @@ public  class Fase extends JPanel implements ActionListener {
         return true;
         
         }
-	public Boolean checarColisoes() {
+	public boolean checarColisoes() {
 	//capturando as formas  dos objetos
 		Rectangle formaNave = nave.getBounds();
 		Rectangle formaInimigo;
