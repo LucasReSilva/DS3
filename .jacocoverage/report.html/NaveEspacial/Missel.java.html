@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Missel.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Jogo&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">NaveEspacial</a> &gt; <span class="el_source">Missel.java</span></div><h1>Missel.java</h1><pre class="source lang-java linenums">package NaveEspacial;
+import java.awt.Image;
+import java.awt.Rectangle;
+import javax.swing.ImageIcon;
+
+public class Missel extends Movimentavel{
+
+	//iniciando largura da tela e velocidade do missel
+	private static final int LARGURA_TELA = 745;
+<span class="nc" id="L10">	private  int VELOCIDADE = 10;</span>
+	
+	//construtor missel, recebendo a posição da nave
+<span class="nc" id="L13">	public Missel(int x, int y){</span>
+<span class="nc" id="L14">		this.x = x;</span>
+<span class="nc" id="L15">		this.y = y;</span>
+		
+		//carregando imagem do missel
+<span class="nc" id="L18">		ImageIcon referencia = new ImageIcon(&quot;imagem/missel.png&quot;);</span>
+		
+		//capturando dimensões do missel
+<span class="nc" id="L21">		imagem = referencia.getImage();</span>
+		
+<span class="nc" id="L23">		this.largura = imagem.getWidth(null);</span>
+<span class="nc" id="L24">		this.altura = imagem.getHeight(null);</span>
+		
+		//deixando missel visivel
+<span class="nc" id="L27">		visible = true;</span>
+<span class="nc" id="L28">	}</span>
+	
+	//movimentando o missel, na tela, na velocidade inserida, e até a largura da tela
+	public void mexer(int a){
+<span class="nc" id="L32">		this.x += this.VELOCIDADE;</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">		if(this.x &gt; LARGURA_TELA){</span>
+<span class="nc" id="L34">			visible = false;</span>
+		}
+<span class="nc" id="L36">	}</span>
+	
+	//criando um rentagulo do missel, para melhorar a precisão do toque com outro objeto.
+	public Rectangle getBounds() {
+<span class="nc" id="L40">		return new Rectangle(x, y, largura, altura);</span>
+		
+	}
+
+	//verifcando se o missel está visivel ou não
+	public boolean isVisible() {
+<span class="nc" id="L46">		return visible;</span>
+	}
+
+	//inserir visibilidade ou não no missel
+	public void setVisible(boolean visible) {
+<span class="nc" id="L51">		this.visible = visible;</span>
+<span class="nc" id="L52">	}</span>
+
+	//capturando a imagem
+	public Image getImagem() {
+<span class="nc" id="L56">		return imagem;</span>
+	}
+
+	//capturando largura do movimento
+	public int getX() {
+<span class="nc" id="L61">		return x;</span>
+	}
+
+	//capturando altura do movimento
+	public int getY() {
+<span class="nc" id="L66">		return y;</span>
+	}
+
+	@Override
+	//capturando altura do missel
+	public int getAltura() {
+<span class="nc" id="L72">		return altura;</span>
+	}
+
+	@Override
+	
+	//capturando largura do missel
+	public int getLargura() {
+<span class="nc" id="L79">		return largura;</span>
+	}
+
+	@Override
+	public boolean isVisivel() {
+<span class="nc" id="L84">		return visible;</span>
+	}
+
+	@Override
+	public void setVisivel(boolean visivel) {
+<span class="nc" id="L89">		visible = visivel;</span>
+		
+<span class="nc" id="L91">	}</span>
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

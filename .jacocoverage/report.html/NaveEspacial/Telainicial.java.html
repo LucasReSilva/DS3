@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Telainicial.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Jogo&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">NaveEspacial</a> &gt; <span class="el_source">Telainicial.java</span></div><h1>Telainicial.java</h1><pre class="source lang-java linenums">
+package NaveEspacial;
+
+import NaveEspacial.Principal;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+public class Telainicial extends javax.swing.JFrame {
+<span class="nc" id="L27">    private int cont=0;</span>
+<span class="nc" id="L28">    String nome=&quot;Record.txt&quot;;</span>
+<span class="nc" id="L29">    String [] linha= new String[22];   </span>
+    private String nome2;
+    private String nomeJogador;
+<span class="nc" id="L32">    private int x=0;</span>
+    private String linha2;
+
+<span class="nc" id="L35">    public Telainicial() throws FileNotFoundException, IOException {</span>
+<span class="nc" id="L36">        LerArquivo();	</span>
+<span class="nc" id="L37">	setResizable(false);</span>
+<span class="nc" id="L38">        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L39">        setLocationRelativeTo(null);</span>
+<span class="nc" id="L40">        setTitle(&quot;Guerra no Espaço&quot;);</span>
+<span class="nc" id="L41">        initComponents();</span>
+<span class="nc" id="L42">        preencher_jtable();  </span>
+<span class="nc" id="L43">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L49">        jMenu1 = new javax.swing.JMenu();</span>
+<span class="nc" id="L50">        jPanel1 = new javax.swing.JPanel();</span>
+<span class="nc" id="L51">        jButton1 = new javax.swing.JButton();</span>
+<span class="nc" id="L52">        jScrollPane1 = new javax.swing.JScrollPane();</span>
+<span class="nc" id="L53">        jTable1 = new javax.swing.JTable();</span>
+<span class="nc" id="L54">        jMenuBar1 = new javax.swing.JMenuBar();</span>
+<span class="nc" id="L55">        jMenu2 = new javax.swing.JMenu();</span>
+<span class="nc" id="L56">        jMenu3 = new javax.swing.JMenu();</span>
+<span class="nc" id="L57">        jMenu4 = new javax.swing.JMenu();</span>
+
+<span class="nc" id="L59">        jMenu1.setText(&quot;jMenu1&quot;);</span>
+
+<span class="nc" id="L61">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+
+<span class="nc" id="L63">        jPanel1.setBackground(new java.awt.Color(102, 102, 255));</span>
+
+<span class="nc" id="L65">        jButton1.setText(&quot;Iniciar Jogo&quot;);</span>
+<span class="nc" id="L66">        jButton1.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L68">                jButton1ActionPerformed(evt);</span>
+<span class="nc" id="L69">            }</span>
+        });
+
+<span class="nc" id="L72">        jTable1.setModel(new javax.swing.table.DefaultTableModel(</span>
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                &quot;Jogador&quot;, &quot;Record&quot;
+            }
+<span class="nc" id="L88">        ) {</span>
+<span class="nc" id="L89">            Class[] types = new Class [] {</span>
+                java.lang.String.class, java.lang.String.class
+            };
+<span class="nc" id="L92">            boolean[] canEdit = new boolean [] {</span>
+                true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+<span class="nc" id="L97">                return types [columnIndex];</span>
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+<span class="nc" id="L101">                return canEdit [columnIndex];</span>
+            }
+        });
+<span class="nc" id="L104">        jScrollPane1.setViewportView(jTable1);</span>
+
+<span class="nc" id="L106">        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);</span>
+<span class="nc" id="L107">        jPanel1.setLayout(jPanel1Layout);</span>
+<span class="nc" id="L108">        jPanel1Layout.setHorizontalGroup(</span>
+<span class="nc" id="L109">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L110">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L111">                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L112">                .addGap(0, 0, Short.MAX_VALUE))</span>
+<span class="nc" id="L113">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L114">                .addGap(140, 140, 140)</span>
+<span class="nc" id="L115">                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L116">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L118">        jPanel1Layout.setVerticalGroup(</span>
+<span class="nc" id="L119">            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L120">            .addGroup(jPanel1Layout.createSequentialGroup()</span>
+<span class="nc" id="L121">                .addContainerGap(40, Short.MAX_VALUE)</span>
+<span class="nc" id="L122">                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L123">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L124">                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+        );
+
+<span class="nc" id="L127">        jMenu2.setText(&quot;Iniciar Jogo&quot;);</span>
+<span class="nc" id="L128">        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L130">                jMenu2MouseClicked(evt);</span>
+<span class="nc" id="L131">            }</span>
+        });
+<span class="nc" id="L133">        jMenu2.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L135">                jMenu2ActionPerformed(evt);</span>
+<span class="nc" id="L136">            }</span>
+        });
+<span class="nc" id="L138">        jMenuBar1.add(jMenu2);</span>
+
+<span class="nc" id="L140">        jMenu3.setText(&quot;sobre&quot;);</span>
+<span class="nc" id="L141">        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L143">                jMenu3MouseClicked(evt);</span>
+<span class="nc" id="L144">            }</span>
+        });
+<span class="nc" id="L146">        jMenu3.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L148">                jMenu3ActionPerformed(evt);</span>
+<span class="nc" id="L149">            }</span>
+        });
+<span class="nc" id="L151">        jMenuBar1.add(jMenu3);</span>
+
+<span class="nc" id="L153">        jMenu4.setText(&quot;Sair&quot;);</span>
+<span class="nc" id="L154">        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {</span>
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+<span class="nc" id="L156">                jMenu4MouseClicked(evt);</span>
+<span class="nc" id="L157">            }</span>
+        });
+<span class="nc" id="L159">        jMenu4.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L161">                jMenu4ActionPerformed(evt);</span>
+<span class="nc" id="L162">            }</span>
+        });
+<span class="nc" id="L164">        jMenuBar1.add(jMenu4);</span>
+
+<span class="nc" id="L166">        setJMenuBar(jMenuBar1);</span>
+
+<span class="nc" id="L168">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
+<span class="nc" id="L169">        getContentPane().setLayout(layout);</span>
+<span class="nc" id="L170">        layout.setHorizontalGroup(</span>
+<span class="nc" id="L171">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L172">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()</span>
+<span class="nc" id="L173">                .addGap(0, 0, Short.MAX_VALUE)</span>
+<span class="nc" id="L174">                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L175">                .addGap(0, 0, 0))</span>
+        );
+<span class="nc" id="L177">        layout.setVerticalGroup(</span>
+<span class="nc" id="L178">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L179">            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+        );
+
+<span class="nc" id="L182">        pack();</span>
+<span class="nc" id="L183">        setLocationRelativeTo(null);</span>
+<span class="nc" id="L184">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        
+        try {
+<span class="nc" id="L190">           new Principal(1);</span>
+<span class="nc" id="L191">        } catch (IOException ex) {</span>
+<span class="nc" id="L192">            Logger.getLogger(Telainicial.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L193">        }</span>
+<span class="nc" id="L194">            dispose();</span>
+              
+<span class="nc" id="L196">    }//GEN-LAST:event_jButton1ActionPerformed</span>
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+    
+<span class="nc" id="L200">    }//GEN-LAST:event_jMenu2ActionPerformed</span>
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+<span class="nc" id="L203">       				JOptionPane.showMessageDialog(null,</span>
+						&quot;Projeto de POO UFS 2015 \nProf: Alberto Costa Neto \nAluno: Brenno Santana Soares\n\n&quot;
+                                                   +&quot;       Comandos do jogo: \n&quot;     
+                                                 + &quot;Use a setas para guiar a nave \n Espaço &quot;
+                                                        +&quot;para atiros Normais \n'Q' para atiros especiais\n &quot;
+                                                        +&quot;Enter para reniciar \n&quot;+&quot;          Bom jogo!!&quot;,
+						&quot;Informacoes&quot;, JOptionPane.INFORMATION_MESSAGE);
+<span class="nc" id="L210">    }//GEN-LAST:event_jMenu3ActionPerformed</span>
+
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+<span class="nc" id="L213">   System.exit(0);</span>
+<span class="nc" id="L214">    }//GEN-LAST:event_jMenu4ActionPerformed</span>
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+          try {
+<span class="nc" id="L218">           new Principal(1);</span>
+<span class="nc" id="L219">        } catch (IOException ex) {</span>
+<span class="nc" id="L220">            Logger.getLogger(Telainicial.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L221">        }</span>
+<span class="nc" id="L222">            dispose();</span>
+<span class="nc" id="L223">    }//GEN-LAST:event_jMenu2MouseClicked</span>
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+<span class="nc" id="L226">               				JOptionPane.showMessageDialog(null,</span>
+						&quot;Projeto de POO UFS 2015 \nProf: Alberto Costa Neto \nAluno: Brenno Santana Soares\n\n&quot;
+                                                   +&quot;       Comandos do jogo: \n&quot;     
+                                                 + &quot;Use a setas para guiar a nave \n Espaço &quot;
+                                                        +&quot;para tiros Normais \n'Q' para tiros especiais\n &quot;
+                                                        +&quot;Enter para reniciar \n&quot;+&quot;          Bom jogo!!&quot;,
+						&quot;Informacoes&quot;, JOptionPane.INFORMATION_MESSAGE);
+<span class="nc" id="L233">    }//GEN-LAST:event_jMenu3MouseClicked</span>
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+<span class="nc" id="L236">      System.exit(0);</span>
+<span class="nc" id="L237">    }//GEN-LAST:event_jMenu4MouseClicked</span>
+
+    public static void main(String args[]) {
+      
+<span class="nc" id="L241">        java.awt.EventQueue.invokeLater(new Runnable() {</span>
+            @Override
+            public void run() {
+                try {
+<span class="nc" id="L245">                    new Telainicial().setVisible(true);</span>
+<span class="nc" id="L246">                } catch (IOException ex) {</span>
+<span class="nc" id="L247">                    Logger.getLogger(Telainicial.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L248">                }</span>
+<span class="nc" id="L249">            }</span>
+        });
+<span class="nc" id="L251">    }</span>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    // End of variables declaration//GEN-END:variables
+<span class="nc" id="L264">private int n=0;</span>
+    public void preencher_jtable()
+{
+<span class="nc" id="L267">        DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();</span>
+<span class="nc" id="L268">        modelo.setNumRows(0);  </span>
+<span class="nc bnc" id="L269" title="All 2 branches missed.">            while (n&lt;19){</span>
+<span class="nc" id="L270">       modelo.addRow(new Object [] {linha[n],linha[n+1]});</span>
+<span class="nc" id="L271">         n= n +2;</span>
+            }     
+<span class="nc" id="L273">        }</span>
+
+        public void LerArquivo() throws IOException{
+<span class="nc" id="L276">    FileReader fr = new FileReader(new File(this.nome));</span>
+<span class="nc" id="L277">    BufferedReader bfr = new BufferedReader(fr);</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">         while(cont&lt;22){</span>
+<span class="nc" id="L279">        linha[cont] = bfr.readLine();</span>
+<span class="nc" id="L280">        cont++;</span>
+        }
+<span class="nc" id="L282">         bfr.close();</span>
+<span class="nc" id="L283">        }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

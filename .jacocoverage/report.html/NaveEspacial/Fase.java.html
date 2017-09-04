@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Fase.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Jogo&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">NaveEspacial</a> &gt; <span class="el_source">Fase.java</span></div><h1>Fase.java</h1><pre class="source lang-java linenums">package NaveEspacial;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public  class Fase extends JPanel implements ActionListener {  
+	//plano de fundo da fase
+	private Image fundo;
+        private Boolean NaveMexer;
+        private Boolean Finalfase;
+        private boolean colisao;
+	//objeto nave
+	private Nave nave;
+        private Telainicial tela;
+	//variavel para velocidade do jogo
+	private Timer timer;
+	//lista de inimigos
+<span class="pc" id="L38">	private List&lt;Inimigo&gt; inimigos = new ArrayList&lt;&gt;();</span>
+
+    public Nave getNave() {
+<span class="nc" id="L41">        return nave;</span>
+    }
+
+    public void setNave(Nave nave) {
+<span class="fc" id="L45">        this.nave = nave;</span>
+<span class="fc" id="L46">    }</span>
+
+    public List&lt;Inimigo&gt; getInimigos() {
+<span class="fc" id="L49">        return inimigos;</span>
+    }
+
+    public void setInimigos(List&lt;Inimigo&gt; inimigos) {
+<span class="nc" id="L53">        this.inimigos = inimigos;</span>
+<span class="nc" id="L54">    }</span>
+
+    public boolean isEmJogo() {
+<span class="nc" id="L57">        return emJogo;</span>
+    }
+
+    public void setEmJogo(boolean emJogo) {
+<span class="nc" id="L61">        this.emJogo = emJogo;</span>
+<span class="nc" id="L62">    }</span>
+
+    public int getDificuldade() {
+<span class="nc" id="L65">        return dificuldade;</span>
+    }
+
+    public void setDificuldade(int dificuldade) {
+<span class="nc" id="L69">        this.dificuldade = dificuldade;</span>
+<span class="nc" id="L70">    }</span>
+
+    public int getVidas() {
+<span class="nc" id="L73">        return vidas;</span>
+    }
+
+    public void setVidas(int vidas) {
+<span class="nc" id="L77">        this.vidas = vidas;</span>
+<span class="nc" id="L78">    }</span>
+
+    public int getFase() {
+<span class="nc" id="L81">        return fase;</span>
+    }
+
+    public void setFase(int fase) {
+<span class="nc" id="L85">        this.fase = fase;</span>
+<span class="nc" id="L86">    }</span>
+	//saber se o jogo acabou
+	private boolean emJogo; 
+        // dificuldade do jogo
+<span class="pc" id="L90">        private int dificuldade =1;</span>
+<span class="pc" id="L91">        private int cont =1;</span>
+        // numero de vidas
+<span class="pc" id="L93">        private int vidas = 5;</span>
+        // numero de fases
+<span class="pc" id="L95">        private int fase= 1;</span>
+        // variavel para o record
+<span class="pc" id="L97">        private int record= 0;</span>
+        // varialvel para o limete de coordenadas dos inimigos
+<span class="pc" id="L99">        private int limite= 800;</span>
+        // varialvel do nome do jogador
+<span class="pc" id="L101">        private String nomejogador = &quot;Anônimo&quot;;</span>
+<span class="pc" id="L102">        private String MSG_QUAL_NOME = &quot;Parabéns seu Recorde esta entre os dez melhores!!\n qual é seu nome?&quot;;</span>
+       
+	//iniciando o construtor da fase
+<span class="fc" id="L105">        public Fase(){</span>
+        
+        
+<span class="fc" id="L108">        }</span>
+<span class="nc" id="L109">	public Fase( int comecar) throws IOException {</span>
+		//focus direto na fase
+<span class="nc" id="L111">		setFocusable(true);</span>
+<span class="nc" id="L112">		setDoubleBuffered(true);</span>
+		//adicionando eventos do teclado
+<span class="nc" id="L114">		addKeyListener(new TecladoAdapter());</span>
+		//carregando a imagem de fundo
+<span class="nc" id="L116">                ImageIcon referencia = new ImageIcon(&quot;imagem/fundo000.png&quot;);</span>
+<span class="nc" id="L117">		fundo = referencia.getImage();</span>
+		//inciando o objeto nave
+		//nave = new Nave();
+<span class="nc" id="L120">                tela = new Telainicial();</span>
+		//dizendo que o jogo começou
+<span class="nc" id="L122">		emJogo = true;</span>
+		//carregando os inimigos
+<span class="nc" id="L124">		inicializaInimigos(8,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_2.png&quot;);</span>
+		//definindo delay jogo
+<span class="nc" id="L126">		timer = new Timer(10, this);</span>
+		//iniciando
+<span class="nc" id="L128">		timer.start();</span>
+                
+<span class="nc" id="L130">	}</span>
+        //passando as coordenadas aleatoria para o nascimento dos inimigos
+         int rand1(int limite){
+<span class="fc" id="L133">            Random random = new Random();  </span>
+<span class="fc" id="L134">            int resultado = random.nextInt(limite) + limite ;  </span>
+<span class="fc" id="L135">            return resultado;</span>
+       }
+         int rand2(){
+<span class="fc" id="L138">            Random random = new Random();  </span>
+<span class="fc" id="L139">            int resultado = random.nextInt(460);</span>
+<span class="fc" id="L140">            return resultado;</span>
+       }
+ 
+	//metodo para iniciar os inimigos, nas coordenadas geradas
+	public void inicializaInimigos(int n,String inimigo1, String inimigo2) {
+		
+<span class="fc bfc" id="L146" title="All 2 branches covered.">		for (int i = 0; i &lt; n; i++) {</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">                       if (i ==10){</span>
+<span class="fc" id="L148">                           limite =1500;</span>
+                       }
+<span class="fc bfc" id="L150" title="All 2 branches covered.">                       if (i ==20){</span>
+<span class="fc" id="L151">                           limite =2000;</span>
+                       }
+<span class="fc bfc" id="L153" title="All 2 branches covered.">                       if (i ==50){</span>
+<span class="fc" id="L154">                           limite =3000;</span>
+                       }
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">                        if (i ==100){</span>
+<span class="nc" id="L157">                           limite =4000;</span>
+                       }
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">                         if (i ==200){</span>
+<span class="nc" id="L160">                           limite =5000;</span>
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">                       } if (i ==300){</span>
+<span class="nc" id="L162">                           limite =8000;</span>
+                       }
+<span class="fc" id="L164">			inimigos.add(new Inimigo(rand1(limite), rand2(),inimigo1,inimigo2));                      </span>
+		}
+<span class="fc" id="L166">                limite = 800;</span>
+<span class="fc" id="L167">	}</span>
+        void gameover(Graphics g) {     
+<span class="nc" id="L169">            Graphics2D graficos = (Graphics2D) g;</span>
+<span class="nc" id="L170">            ImageIcon fimJogo = new ImageIcon(&quot;imagem/game_over2.png&quot;);</span>
+<span class="nc" id="L171">            graficos.drawImage(fimJogo.getImage(), 0, 0, null);</span>
+       
+       
+<span class="nc" id="L174">        }   </span>
+	//criando o metodo paint, para criar e recriar os movimentos
+        @Override
+	public void paint(Graphics g) {
+		//iniciando objeto graficos, da Classe Graphics2D do java
+<span class="nc" id="L179">	     Graphics2D graficos = (Graphics2D) g;</span>
+		//inserindo imagem;
+<span class="nc" id="L181">	     graficos.drawImage(fundo, 0, 0, null);</span>
+		//condição para se ainda houver jogo
+<span class="nc bnc" id="L183" title="All 2 branches missed.">	     if (emJogo) {</span>
+		//inserindo a nave na posição atual
+<span class="nc" id="L185">			graficos.drawImage(nave.getImagem(), nave.getX(), nave.getY(),this);</span>
+			//carregando a lista de misseis da nave
+<span class="nc" id="L187">			List&lt;Missel&gt; misseis = nave.getMisseis();</span>
+			//inserindo na imagem dos misseis da nave
+<span class="nc bnc" id="L189" title="All 2 branches missed.">			for (int i = 0; i &lt; misseis.size(); i++) {</span>
+<span class="nc" id="L190">				Missel m = (Missel) misseis.get(i);</span>
+<span class="nc" id="L191">				graficos.drawImage(m.getImagem(), m.getX(), m.getY(), this);</span>
+			}
+			//inserindo na imagem os inimigos
+<span class="nc bnc" id="L194" title="All 2 branches missed.">			for (int i = 0; i &lt; inimigos.size(); i++) {</span>
+<span class="nc" id="L195">				Inimigo in = inimigos.get(i);</span>
+<span class="nc" id="L196">				graficos.drawImage(in.getImagem(), in.getX(), in.getY(), this);       </span>
+			}
+			//inserindo na imagem a quantidade de inimigos restantes
+<span class="nc" id="L199">                        graficos.setColor(Color.white);</span>
+<span class="nc" id="L200">			graficos.drawString(&quot;Inimigos: &quot; + inimigos.size(), 5, 15);</span>
+<span class="nc" id="L201">                        graficos.drawString(&quot;vidas: &quot; + this.vidas, 100, 15);</span>
+<span class="nc" id="L202">                        graficos.drawString(&quot;tiro especial: &quot; + nave.getTiroespecial(), 175, 15);</span>
+<span class="nc" id="L203">                        graficos.drawString(&quot;Fase Atual: &quot; + this.fase, 300, 15);</span>
+<span class="nc" id="L204">                        graficos.drawString(&quot;Dificuldade: &quot; + this.dificuldade,400, 15);</span>
+<span class="nc" id="L205">                        graficos.drawString(&quot;record: &quot; + this.record, 500, 15);</span>
+                       
+<span class="nc" id="L207">		} else {</span>
+                 
+                     //imagem do fim do jogo
+<span class="nc" id="L210">                        gameover(g);   </span>
+
+		}
+		//fechando o objeto de Grafico
+<span class="nc" id="L214">		g.dispose();                             </span>
+<span class="nc" id="L215">	}	</span>
+	//metodos dos eventos
+        @Override
+	public void actionPerformed(ActionEvent e) {
+<span class="nc bnc" id="L219" title="All 2 branches missed.">		if (!this.emJogo   ) {</span>
+<span class="nc" id="L220">			emJogo = false;                        </span>
+		}else{                    
+	//caso ainda tenha jogo
+	//carrega a lista de objeto misseis
+<span class="nc" id="L224">		List&lt;Missel&gt; misseis = nave.getMisseis();</span>
+
+		//faz cada missel se deslocar na tela
+<span class="nc bnc" id="L227" title="All 2 branches missed.">		for (int i = 0; i &lt; misseis.size(); i++) {</span>
+<span class="nc" id="L228">			Missel m = (Missel) misseis.get(i);</span>
+                       
+<span class="nc bnc" id="L230" title="All 2 branches missed.">			if (m.isVisible()) {</span>
+			//caso ele seja visivel continua se deslocando
+<span class="nc" id="L232">				m.mexer(3);</span>
+			} else {
+			//caso o missel esteja invisivel, retira do array
+<span class="nc" id="L235">				misseis.remove(i);</span>
+			}
+		}
+		//faz os inimigos se deslocar na tela
+<span class="nc bnc" id="L239" title="All 2 branches missed.">		for (int i = 0; i &lt; inimigos.size(); i++) {</span>
+<span class="nc" id="L240">			Inimigo in = inimigos.get(i);</span>
+
+<span class="nc bnc" id="L242" title="All 2 branches missed.">			if (in.isVisible()) {</span>
+<span class="nc" id="L243">				in.mexer(dificuldade);</span>
+                               
+			} else {
+<span class="nc" id="L246">				inimigos.remove(i);</span>
+				//caso o inimigo sai da tela, o jogo acaba
+<span class="nc bnc" id="L248" title="All 2 branches missed.">                                  if (in.mexer(dificuldade) == false){</span>
+<span class="nc" id="L249">                                       vidas--;</span>
+<span class="nc bnc" id="L250" title="All 2 branches missed.">                                        if (vidas &lt;0){</span>
+<span class="nc" id="L251">                                      this.emJogo = in.mexer(dificuldade);</span>
+                                      
+                                        }
+                                  }
+			}
+		}
+		//faz a nave se mecher
+<span class="nc" id="L258">		NaveMexer = nave.mexer();</span>
+		//checa as colisões
+<span class="nc" id="L260">		colisao =checarColisoes();</span>
+<span class="nc" id="L261">                DestruirInimigos();</span>
+<span class="nc" id="L262">                Finalfase=chegarfinal(cont);</span>
+		//repinta a tela
+<span class="nc" id="L264">		repaint();</span>
+<span class="nc bnc" id="L265" title="All 2 branches missed.">                if(!emJogo){</span>
+                       
+<span class="nc bnc" id="L267" title="All 2 branches missed.">                       if (Integer.parseInt(tela.linha[19]) &lt; record){</span>
+<span class="nc" id="L268">                            nomejogador = JOptionPane.showInputDialog(MSG_QUAL_NOME);  </span>
+<span class="nc bnc" id="L269" title="All 2 branches missed.">                            if (nomejogador ==null){</span>
+<span class="nc" id="L270">                                nomejogador =&quot;Anônimo&quot;;</span>
+                            }
+                            try {
+<span class="nc" id="L273">                                 salvaarquivo();</span>
+<span class="nc" id="L274">                            } catch (IOException ex) {</span>
+<span class="nc" id="L275">                                 Logger.getLogger(Fase.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L276">                            }</span>
+                                 }
+                }
+	}
+                
+<span class="nc" id="L281">        }</span>
+        
+   
+        public boolean chegarfinal(int a){
+<span class="fc" id="L285">            cont=a;</span>
+<span class="fc bfc" id="L286" title="All 2 branches covered.">            if (cont==1){</span>
+<span class="fc" id="L287">            this.fase = 1;</span>
+            }
+        
+<span class="fc bfc" id="L290" title="All 2 branches covered.">        if (inimigos.size() == 0 ) {</span>
+<span class="fc" id="L291">             vidas++;</span>
+<span class="fc" id="L292">             cont++;</span>
+<span class="fc" id="L293">             nave.AddTiroespecial();</span>
+<span class="fc" id="L294">             this.fase ++;</span>
+             
+<span class="fc bfc" id="L296" title="All 2 branches covered.">             if (cont &lt; 5){</span>
+<span class="fc" id="L297">                   inicializaInimigos(4*cont,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_2.png&quot;);</span>
+
+             }
+<span class="fc bfc" id="L300" title="All 4 branches covered.">             if (cont&gt;=5 &amp;&amp; cont&lt; 10) {</span>
+<span class="fc" id="L301">                   inicializaInimigos(4*cont,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_2.png&quot;);</span>
+<span class="fc" id="L302">                   dificuldade=2;</span>
+<span class="fc" id="L303">                   ImageIcon referencia = new ImageIcon(&quot;imagem/fundo01.png&quot;);</span>
+<span class="fc" id="L304">		   fundo = referencia.getImage();</span>
+                
+               }
+<span class="fc bfc" id="L307" title="All 4 branches covered.">             if (cont&gt;=10 &amp;&amp; cont&lt;15) {</span>
+<span class="fc" id="L308">                    inicializaInimigos(4*cont,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_1.png&quot;);</span>
+<span class="fc" id="L309">                    dificuldade=2;</span>
+<span class="fc" id="L310">                    ImageIcon referencia = new ImageIcon(&quot;imagem/fundo02.png&quot;);</span>
+<span class="fc" id="L311">		    fundo = referencia.getImage();</span>
+               }
+<span class="fc bfc" id="L313" title="All 4 branches covered.">             if (cont&gt;= 15 &amp;&amp; cont&lt;20) {</span>
+<span class="fc" id="L314">                    inicializaInimigos(4*cont,&quot;imagem/inimigo_1.png&quot;,&quot;imagem/inimigo_3.png&quot;);</span>
+<span class="fc" id="L315">                    dificuldade=3;</span>
+<span class="fc" id="L316">                    ImageIcon referencia = new ImageIcon(&quot;imagem/fundo03.png&quot;);</span>
+<span class="fc" id="L317">		    fundo = referencia.getImage();</span>
+               }
+<span class="fc bfc" id="L319" title="All 2 branches covered.">               if (cont &gt;=20){</span>
+<span class="fc" id="L320">                   inicializaInimigos(4*cont,&quot;imagem/inimigo_3.png&quot;,&quot;imagem/inimigo_4.png&quot;);</span>
+<span class="fc" id="L321">                   ImageIcon referencia = new ImageIcon(&quot;imagem/fundo04.png&quot;);</span>
+<span class="fc" id="L322">		   fundo = referencia.getImage();</span>
+<span class="fc" id="L323">                   dificuldade=4;</span>
+               }
+               
+<span class="fc" id="L326">               return false;</span>
+            }
+           
+<span class="fc" id="L329">        return true;</span>
+        
+        }
+	public Boolean checarColisoes() {
+	//capturando as formas  dos objetos
+<span class="nc" id="L334">		Rectangle formaNave = nave.getBounds();</span>
+		Rectangle formaInimigo;
+<span class="nc bnc" id="L336" title="All 2 branches missed.">		for (int i = 0; i &lt; inimigos.size(); i++) {</span>
+<span class="nc" id="L337">			Inimigo tempInimigo = inimigos.get(i);</span>
+<span class="nc" id="L338">			formaInimigo = tempInimigo.getBounds();</span>
+			//caso a nave tope em algum inimigo, some os dois e o jogo acaba 
+<span class="nc bnc" id="L340" title="All 2 branches missed.">			if (formaNave.intersects(formaInimigo)) {</span>
+<span class="nc" id="L341">                                dificuldade=1;</span>
+<span class="nc" id="L342">                                cont=1;</span>
+<span class="nc" id="L343">                               fase=1;</span>
+<span class="nc" id="L344">                                inimigos.clear();</span>
+<span class="nc" id="L345">				emJogo = false;</span>
+<span class="nc" id="L346">                              return emJogo;</span>
+			}
+                        
+		}
+		//carregando lista de misseis
+
+<span class="nc" id="L352">              return emJogo;</span>
+	}
+        private Boolean DestruirInimigos(){
+<span class="nc" id="L355">            Boolean destruir = false;</span>
+                Rectangle formaInimigo;
+		Rectangle formaMissel;
+<span class="nc" id="L358">        		List&lt;Missel&gt; misseis = nave.getMisseis();</span>
+		//para cada missel gerado
+<span class="nc bnc" id="L360" title="All 2 branches missed.">		for (int i = 0; i &lt; misseis.size(); i++) {</span>
+<span class="nc" id="L361">			Missel tempMissel = misseis.get(i);</span>
+			//capturando a forma do missel
+<span class="nc" id="L363">			formaMissel = tempMissel.getBounds();</span>
+		//para cada inimigo no jogo
+<span class="nc bnc" id="L365" title="All 2 branches missed.">			for (int j = 0; j &lt; inimigos.size(); j++) {</span>
+		
+<span class="nc" id="L367">				Inimigo tempInimigo = inimigos.get(j);</span>
+				//capturando a forma do inimigo
+<span class="nc" id="L369">				formaInimigo = tempInimigo.getBounds();</span>
+
+				//caso o missel tope no inimigo, some os dois
+<span class="nc bnc" id="L372" title="All 2 branches missed.">				if (formaMissel.intersects(formaInimigo)) {</span>
+<span class="nc" id="L373">                                        record = record + dificuldade*100;</span>
+<span class="nc" id="L374">					tempInimigo.setVisible(false);</span>
+<span class="nc" id="L375">					tempMissel.setVisible(false);</span>
+<span class="nc" id="L376">                                        destruir =true;</span>
+				}
+
+			}
+
+		}
+<span class="nc" id="L382">        return destruir;</span>
+        }
+
+	//metodos do teclado.
+<span class="nc" id="L386">	private class TecladoAdapter extends KeyAdapter {</span>
+       
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			
+<span class="nc bnc" id="L392" title="All 2 branches missed.">			if(e.getKeyCode() == KeyEvent.VK_ENTER){</span>
+<span class="nc bnc" id="L393" title="All 2 branches missed.">                            if ( !emJogo ){</span>
+                                
+                            }
+<span class="nc" id="L396">                            emJogo = true;</span>
+<span class="nc" id="L397">                            record =0;</span>
+                            //nave = new Nave();
+<span class="nc" id="L399">                            inicializaInimigos(10,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_2.png&quot;);</span>
+<span class="nc" id="L400">                            dificuldade=1;</span>
+<span class="nc" id="L401">                            vidas = 5;</span>
+<span class="nc" id="L402">                            ImageIcon referencia =  new ImageIcon(&quot;imagem/fundo000.png&quot;);</span>
+<span class="nc" id="L403">                            fundo = referencia.getImage();</span>
+<span class="nc" id="L404">                            cont = 1;</span>
+<span class="nc" id="L405">                            limite = 800;</span>
+			}
+                        
+			
+<span class="nc" id="L409">			nave.keyPressed(e);</span>
+<span class="nc" id="L410">		}</span>
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+<span class="nc" id="L414">			nave.keyReleased(e);</span>
+<span class="nc" id="L415">		}</span>
+
+	}
+
+      public int salvaarquivo() throws IOException{
+<span class="nc" id="L420">          int posicao=999;</span>
+<span class="nc" id="L421">         FileWriter fw = new FileWriter(new File(&quot;Record.txt&quot;),false); </span>
+<span class="nc" id="L422">         BufferedWriter bfw = new BufferedWriter(fw);</span>
+<span class="nc bnc" id="L423" title="All 2 branches missed.">        for(int i=1;i&lt;20;i=i+2){</span>
+<span class="nc bnc" id="L424" title="All 2 branches missed.">         if (Integer.parseInt(tela.linha[i]) &lt; record){</span>
+<span class="nc" id="L425">            bfw.write(nomejogador);</span>
+<span class="nc" id="L426">            bfw.newLine();                        </span>
+<span class="nc" id="L427">            bfw.write(&quot;&quot;+record);</span>
+<span class="nc" id="L428">            bfw.newLine(); </span>
+<span class="nc" id="L429">            record= -1;</span>
+         }
+<span class="nc" id="L431">            bfw.write(tela.linha[i-1]);</span>
+<span class="nc" id="L432">            bfw.newLine();                        </span>
+<span class="nc" id="L433">            bfw.write(&quot;&quot;+tela.linha[i]);</span>
+<span class="nc" id="L434">            bfw.newLine(); </span>
+       
+        }
+ 
+<span class="nc" id="L438">            bfw.close();  </span>
+<span class="nc" id="L439">             return posicao;</span>
+        }
+     
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
