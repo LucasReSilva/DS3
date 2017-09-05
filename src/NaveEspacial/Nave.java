@@ -9,22 +9,22 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 public class Nave extends Movimentavel {
-    
+
     private int dx, dy;
     //Uma nave contem um array de misseis
     private List<Missel> misseis;
     private List<Nave> nave;
     public int tiroespecial = 50;
-    
+
     public int getTiroespecial() {
         return tiroespecial;
     }
-    
+
     public Boolean AddTiroespecial() {
         this.tiroespecial = getTiroespecial() + 5;
         return true;
     }
-    
+
     public Nave() {
 
         //carregando a imagem da nave
@@ -41,7 +41,7 @@ public class Nave extends Movimentavel {
         //posicão inicial da nave
         this.x = 1;
         this.y = 230;
-        
+
     }
 
     //metodo para a nave não sair da tela
@@ -49,7 +49,7 @@ public class Nave extends Movimentavel {
         Boolean limite = true;
         x += dx;
         y += dy;
-        
+
         if (this.x < 1) {
             this.x = 1;
             limite = false;
@@ -57,14 +57,14 @@ public class Nave extends Movimentavel {
         if (this.x > 700) {
             this.x = 1;
             limite = false;
-            
+
         }
-        
+
         if (this.y < 1) {
             this.y = 1;
             limite = false;
         }
-        
+
         if (this.y > 460) {
             this.y = 460;
             limite = false;
@@ -78,14 +78,14 @@ public class Nave extends Movimentavel {
     public void atira() {
         this.misseis.add(new Missel(this.x + this.largura, this.y + this.altura
                 / 3));
-        
+
     }
 
     public void atiraespecial() {
         this.misseis.add(new Missel(this.x + this.largura - 25, this.y + this.altura - 15));
         this.misseis.add(new Missel(this.x + this.largura - 23, this.y + this.altura - 60));
         this.misseis.add(new Missel(this.x + this.largura, this.y + this.altura / 3));
-        
+
     }
 
     public void teclaPress(int codigo) {
@@ -93,26 +93,26 @@ public class Nave extends Movimentavel {
             atira();
         }
         if (codigo == KeyEvent.VK_Q) {
-            
+
             if (this.tiroespecial > 0) {
-                
+
                 atiraespecial();
                 this.tiroespecial--;
             }
-            
+
         }
-        
+
         if (codigo == KeyEvent.VK_UP) {
             dy = -5;
-            
+
         }
         if (codigo == KeyEvent.VK_DOWN) {
             dy = 5;
         }
-        
+
         if (codigo == KeyEvent.VK_LEFT) {
             dx = -5;
-            
+
         }
         if (codigo == KeyEvent.VK_RIGHT) {
             dx = 5;
@@ -123,35 +123,35 @@ public class Nave extends Movimentavel {
     public void keyPressed(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
         this.teclaPress(codigo);
-        
+
     }
-    
+
     public void keyReleased(KeyEvent tecla) {
         int codigo = tecla.getKeyCode();
-        
+
         if (codigo == KeyEvent.VK_UP) {
             dy = 0;
-            
+
         }
         if (codigo == KeyEvent.VK_DOWN) {
             dy = 0;
-            
+
         }
         if (codigo == KeyEvent.VK_LEFT) {
             dx = 0;
-            
+
         }
         if (codigo == KeyEvent.VK_RIGHT) {
             dx = 0;
-            
+
         }
-        
+
     }
 
     //aqui é criada uma dimensão retangular da nave, para ficar mais preciso, quanto tocar em outro objeto
     public Rectangle getBounds() {
         return new Rectangle(x, y, largura, altura);
-        
+
     }
 
     //metodo para verificar se a nave está visivel ou não
@@ -195,5 +195,5 @@ public class Nave extends Movimentavel {
     public int getLargura() {
         return largura;
     }
-    
+
 }

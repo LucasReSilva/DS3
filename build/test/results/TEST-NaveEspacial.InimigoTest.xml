@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="1" failures="0" hostname="DESKTOP-1CO0RC1" name="NaveEspacial.MovimentavelTest" skipped="0" tests="1" time="0.258" timestamp="2017-09-05T04:36:08">
+<testsuite errors="0" failures="0" hostname="DESKTOP-1CO0RC1" name="NaveEspacial.InimigoTest" skipped="0" tests="5" time="0.204" timestamp="2017-09-05T04:36:07">
   <properties>
     <property name="libs.jsp-compiler.javadoc" value="" />
     <property name="netbeans.autoupdate.country" value="BR" />
@@ -65,7 +65,7 @@
     <property name="libs.j2me_common_ant.maven-pom" value="" />
     <property name="libs.spring-webmvc3.0.maven-pom" value="" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner NaveEspacial.MovimentavelTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,E:\Lucas\Desktop\Jogo1\build\test\results\TEST-NaveEspacial.MovimentavelTest.xml crashfile=E:\Lucas\Desktop\Jogo1\build\junitvmwatcher8737327144321040520.properties propsfile=E:\Lucas\Desktop\Jogo1\build\junit3390146459080508322.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner NaveEspacial.InimigoTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,E:\Lucas\Desktop\Jogo1\build\test\results\TEST-NaveEspacial.InimigoTest.xml crashfile=E:\Lucas\Desktop\Jogo1\build\junitvmwatcher7978667045738424496.properties propsfile=E:\Lucas\Desktop\Jogo1\build\junit7590978910277737926.properties" />
     <property name="ant.file.Jogo" value="E:\Lucas\Desktop\Jogo1\build.xml" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
@@ -452,12 +452,11 @@
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
     <property name="libs.javaee-web-api-7.0.javadoc" value="C:\Program Files\NetBeans 8.2\enterprise\docs\javaee-doc-api.jar" />
   </properties>
-  <testcase classname="NaveEspacial.MovimentavelTest" name="obterTotalTest" time="0.185">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at NaveEspacial.Fase.chegarfinal(Fase.java:293)
-	at NaveEspacial.MovimentavelTest.obterTotalTest(MovimentavelTest.java:76)
-</error>
-  </testcase>
+  <testcase classname="NaveEspacial.InimigoTest" name="testMexerCoordenadaXMaiorQue0VariavelControleMaiorQue10EMenorQue21" time="0.127" />
+  <testcase classname="NaveEspacial.InimigoTest" name="testMexerCoordenadaXMaiorQue0VariavelControleIgualA10" time="0.0" />
+  <testcase classname="NaveEspacial.InimigoTest" name="testMexerCoordenadaXMaiorQue0VariavelControleIgualA21" time="0.0" />
+  <testcase classname="NaveEspacial.InimigoTest" name="testMexerCoordenadaXMaiorQue0VariavelControleMenorQue10" time="0.0" />
+  <testcase classname="NaveEspacial.InimigoTest" name="testMexerCoordenadaXMenorQue0" time="0.0" />
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

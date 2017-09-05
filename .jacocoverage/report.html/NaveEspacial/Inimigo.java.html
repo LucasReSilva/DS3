@@ -20,10 +20,10 @@ public class Inimigo extends Movimentavel{
 	//alternando a imagem dos inimigos, para misturar	
 		ImageIcon referencia;
                
-<span class="pc bpc" id="L23" title="1 of 2 branches missed.">		if(contador++ % 3 == 0){</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">		if(contador++ % 3 == 0){</span>
 <span class="fc" id="L24">			referencia = new ImageIcon(inimigo2); //&quot;imagem/inimigo_2.png&quot;</span>
 		} else {
-<span class="nc" id="L26">			referencia = new ImageIcon(inimigo1);//&quot;imagem/inimigo_1.png&quot;</span>
+<span class="fc" id="L26">			referencia = new ImageIcon(inimigo1);//&quot;imagem/inimigo_1.png&quot;</span>
 		}
 		
 		//capturando dimensão do inimigo
@@ -41,25 +41,25 @@ public class Inimigo extends Movimentavel{
 	//metodo para quando o inimigo passar da tela, sumir e retornar que o jogo acabou
 	public boolean mexer(int a){
 		
-<span class="nc bnc" id="L44" title="All 2 branches missed.">		if(this.x &lt; 0){</span>
-<span class="nc" id="L45">			this.visible = false;</span>
-<span class="nc" id="L46">                        return false;</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">		if(this.x &lt; 0){</span>
+<span class="fc" id="L45">			this.visible = false;</span>
+<span class="fc" id="L46">                        return false;</span>
 		} else {
 		//caso não passe da tela, ele se movimenta de acordo com a velocidade
-<span class="nc" id="L49">			this.x -= a;</span>
-<span class="nc bnc" id="L50" title="All 2 branches missed.">                        if(10 &gt;=controle){</span>
+<span class="fc" id="L49">			this.x -= a;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">                        if(10 &gt;=controle){</span>
                         
-<span class="nc" id="L52">                            this.y -=a;</span>
+<span class="fc" id="L52">                            this.y -=a;</span>
                     }
-<span class="nc bnc" id="L54" title="All 4 branches missed.">                        if (controle &lt; 21 &amp;&amp; controle&gt;10){</span>
-<span class="nc" id="L55">                             this.y+=a;</span>
+<span class="fc bfc" id="L54" title="All 4 branches covered.">                        if (controle &lt; 21 &amp;&amp; controle&gt;10){</span>
+<span class="fc" id="L55">                             this.y+=a;</span>
                         }
-<span class="nc bnc" id="L57" title="All 2 branches missed.">                        if (controle ==21){</span>
-<span class="nc" id="L58">                              controle =0;</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">                        if (controle ==21){</span>
+<span class="fc" id="L58">                              controle =0;</span>
                         }
                         
-<span class="nc" id="L61">                        controle++;</span>
-<span class="nc" id="L62">                        return true;</span>
+<span class="fc" id="L61">                        controle++;</span>
+<span class="fc" id="L62">                        return true;</span>
 		}
            
 		
