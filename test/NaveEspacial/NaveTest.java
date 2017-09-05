@@ -59,6 +59,7 @@ public class NaveTest {
 
         assertEquals(expResult, result);
         assertEquals(6, instance.x);
+
     }
 
     /**
@@ -77,6 +78,8 @@ public class NaveTest {
         Boolean result = instance.mexer();
 
         assertEquals(expResult, result);
+        assertEquals(1, instance.x);
+
     }
 
     /**

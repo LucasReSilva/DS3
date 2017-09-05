@@ -1,4 +1,3 @@
-
 package NaveEspacial;
 
 import NaveEspacial.Principal;
@@ -24,22 +23,23 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Telainicial extends javax.swing.JFrame {
-    private int cont=0;
-    String nome="Record.txt";
-    String [] linha= new String[22];   
+
+    private int cont = 0;
+    String nome = "Record.txt";
+    String[] linha = new String[22];
     private String nome2;
     private String nomeJogador;
-    private int x=0;
+    private int x = 0;
     private String linha2;
 
     public Telainicial() throws FileNotFoundException, IOException {
-        LerArquivo();	
-	setResizable(false);
+        LerArquivo();
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setTitle("Guerra no Espaço");
         initComponents();
-        preencher_jtable();  
+        preencher_jtable();
     }
 
     @SuppressWarnings("unchecked")
@@ -184,60 +184,59 @@ public class Telainicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        
+
         try {
-           new Principal(1);
+            new Principal(1);
         } catch (IOException ex) {
             Logger.getLogger(Telainicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-            dispose();
-              
+        dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-    
+
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-       				JOptionPane.showMessageDialog(null,
-						"Projeto de POO UFS 2015 \nProf: Alberto Costa Neto \nAluno: Brenno Santana Soares\n\n"
-                                                   +"       Comandos do jogo: \n"     
-                                                 + "Use a setas para guiar a nave \n Espaço "
-                                                        +"para atiros Normais \n'Q' para atiros especiais\n "
-                                                        +"Enter para reniciar \n"+"          Bom jogo!!",
-						"Informacoes", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,
+                "Projeto de POO UFS 2015 \nProf: Alberto Costa Neto \nAluno: Brenno Santana Soares\n\n"
+                + "       Comandos do jogo: \n"
+                + "Use a setas para guiar a nave \n Espaço "
+                + "para atiros Normais \n'Q' para atiros especiais\n "
+                + "Enter para reniciar \n" + "          Bom jogo!!",
+                "Informacoes", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-   System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jMenu4ActionPerformed
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-          try {
-           new Principal(1);
+        try {
+            new Principal(1);
         } catch (IOException ex) {
             Logger.getLogger(Telainicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-            dispose();
+        dispose();
     }//GEN-LAST:event_jMenu2MouseClicked
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-               				JOptionPane.showMessageDialog(null,
-						"Projeto de POO UFS 2015 \nProf: Alberto Costa Neto \nAluno: Brenno Santana Soares\n\n"
-                                                   +"       Comandos do jogo: \n"     
-                                                 + "Use a setas para guiar a nave \n Espaço "
-                                                        +"para tiros Normais \n'Q' para tiros especiais\n "
-                                                        +"Enter para reniciar \n"+"          Bom jogo!!",
-						"Informacoes", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,
+                "Projeto de POO UFS 2015 \nProf: Alberto Costa Neto \nAluno: Brenno Santana Soares\n\n"
+                + "       Comandos do jogo: \n"
+                + "Use a setas para guiar a nave \n Espaço "
+                + "para tiros Normais \n'Q' para tiros especiais\n "
+                + "Enter para reniciar \n" + "          Bom jogo!!",
+                "Informacoes", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenu3MouseClicked
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
-      System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jMenu4MouseClicked
 
     public static void main(String args[]) {
-      
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -261,25 +260,25 @@ public class Telainicial extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-private int n=0;
-    public void preencher_jtable()
-{
-        DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
-        modelo.setNumRows(0);  
-            while (n<19){
-       modelo.addRow(new Object [] {linha[n],linha[n+1]});
-         n= n +2;
-            }     
-        }
+private int n = 0;
 
-        public void LerArquivo() throws IOException{
-    FileReader fr = new FileReader(new File(this.nome));
-    BufferedReader bfr = new BufferedReader(fr);
-         while(cont<22){
-        linha[cont] = bfr.readLine();
-        cont++;
+    public void preencher_jtable() {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setNumRows(0);
+        while (n < 19) {
+            modelo.addRow(new Object[]{linha[n], linha[n + 1]});
+            n = n + 2;
         }
-         bfr.close();
+    }
+
+    public void LerArquivo() throws IOException {
+        FileReader fr = new FileReader(new File(this.nome));
+        BufferedReader bfr = new BufferedReader(fr);
+        while (cont < 22) {
+            linha[cont] = bfr.readLine();
+            cont++;
         }
+        bfr.close();
+    }
 
 }
