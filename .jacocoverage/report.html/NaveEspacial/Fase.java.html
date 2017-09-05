@@ -42,11 +42,11 @@ public  class Fase extends JPanel implements ActionListener {
     }
 
     public void setNave(Nave nave) {
-<span class="fc" id="L45">        this.nave = nave;</span>
-<span class="fc" id="L46">    }</span>
+<span class="nc" id="L45">        this.nave = nave;</span>
+<span class="nc" id="L46">    }</span>
 
     public List&lt;Inimigo&gt; getInimigos() {
-<span class="fc" id="L49">        return inimigos;</span>
+<span class="nc" id="L49">        return inimigos;</span>
     }
 
     public void setInimigos(List&lt;Inimigo&gt; inimigos) {
@@ -116,7 +116,7 @@ public  class Fase extends JPanel implements ActionListener {
 <span class="nc" id="L116">                ImageIcon referencia = new ImageIcon(&quot;imagem/fundo000.png&quot;);</span>
 <span class="nc" id="L117">		fundo = referencia.getImage();</span>
 		//inciando o objeto nave
-		//nave = new Nave();
+<span class="nc" id="L119">		nave = new Nave();</span>
 <span class="nc" id="L120">                tela = new Telainicial();</span>
 		//dizendo que o jogo começou
 <span class="nc" id="L122">		emJogo = true;</span>
@@ -130,41 +130,41 @@ public  class Fase extends JPanel implements ActionListener {
 <span class="nc" id="L130">	}</span>
         //passando as coordenadas aleatoria para o nascimento dos inimigos
          int rand1(int limite){
-<span class="fc" id="L133">            Random random = new Random();  </span>
-<span class="fc" id="L134">            int resultado = random.nextInt(limite) + limite ;  </span>
-<span class="fc" id="L135">            return resultado;</span>
+<span class="nc" id="L133">            Random random = new Random();  </span>
+<span class="nc" id="L134">            int resultado = random.nextInt(limite) + limite ;  </span>
+<span class="nc" id="L135">            return resultado;</span>
        }
          int rand2(){
-<span class="fc" id="L138">            Random random = new Random();  </span>
-<span class="fc" id="L139">            int resultado = random.nextInt(460);</span>
-<span class="fc" id="L140">            return resultado;</span>
+<span class="nc" id="L138">            Random random = new Random();  </span>
+<span class="nc" id="L139">            int resultado = random.nextInt(460);</span>
+<span class="nc" id="L140">            return resultado;</span>
        }
  
 	//metodo para iniciar os inimigos, nas coordenadas geradas
 	public void inicializaInimigos(int n,String inimigo1, String inimigo2) {
 		
-<span class="fc bfc" id="L146" title="All 2 branches covered.">		for (int i = 0; i &lt; n; i++) {</span>
-<span class="fc bfc" id="L147" title="All 2 branches covered.">                       if (i ==10){</span>
-<span class="fc" id="L148">                           limite =1500;</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">		for (int i = 0; i &lt; n; i++) {</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">                       if (i ==10){</span>
+<span class="nc" id="L148">                           limite =1500;</span>
                        }
-<span class="fc bfc" id="L150" title="All 2 branches covered.">                       if (i ==20){</span>
-<span class="fc" id="L151">                           limite =2000;</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">                       if (i ==20){</span>
+<span class="nc" id="L151">                           limite =2000;</span>
                        }
-<span class="fc bfc" id="L153" title="All 2 branches covered.">                       if (i ==50){</span>
-<span class="fc" id="L154">                           limite =3000;</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">                       if (i ==50){</span>
+<span class="nc" id="L154">                           limite =3000;</span>
                        }
-<span class="pc bpc" id="L156" title="1 of 2 branches missed.">                        if (i ==100){</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">                        if (i ==100){</span>
 <span class="nc" id="L157">                           limite =4000;</span>
                        }
-<span class="pc bpc" id="L159" title="1 of 2 branches missed.">                         if (i ==200){</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">                         if (i ==200){</span>
 <span class="nc" id="L160">                           limite =5000;</span>
-<span class="pc bpc" id="L161" title="1 of 2 branches missed.">                       } if (i ==300){</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">                       } if (i ==300){</span>
 <span class="nc" id="L162">                           limite =8000;</span>
                        }
-<span class="fc" id="L164">			inimigos.add(new Inimigo(rand1(limite), rand2(),inimigo1,inimigo2));                      </span>
+<span class="nc" id="L164">			inimigos.add(new Inimigo(rand1(limite), rand2(),inimigo1,inimigo2));                      </span>
 		}
-<span class="fc" id="L166">                limite = 800;</span>
-<span class="fc" id="L167">	}</span>
+<span class="nc" id="L166">                limite = 800;</span>
+<span class="nc" id="L167">	}</span>
         void gameover(Graphics g) {     
 <span class="nc" id="L169">            Graphics2D graficos = (Graphics2D) g;</span>
 <span class="nc" id="L170">            ImageIcon fimJogo = new ImageIcon(&quot;imagem/game_over2.png&quot;);</span>
@@ -283,50 +283,50 @@ public  class Fase extends JPanel implements ActionListener {
    
         public boolean chegarfinal(int a){
 <span class="fc" id="L285">            cont=a;</span>
-<span class="fc bfc" id="L286" title="All 2 branches covered.">            if (cont==1){</span>
+<span class="pc bpc" id="L286" title="1 of 2 branches missed.">            if (cont==1){</span>
 <span class="fc" id="L287">            this.fase = 1;</span>
             }
         
-<span class="fc bfc" id="L290" title="All 2 branches covered.">        if (inimigos.size() == 0 ) {</span>
+<span class="pc bpc" id="L290" title="1 of 2 branches missed.">        if (inimigos.size() == 0 ) {</span>
 <span class="fc" id="L291">             vidas++;</span>
 <span class="fc" id="L292">             cont++;</span>
-<span class="fc" id="L293">             nave.AddTiroespecial();</span>
-<span class="fc" id="L294">             this.fase ++;</span>
+<span class="nc" id="L293">             nave.AddTiroespecial();</span>
+<span class="nc" id="L294">             this.fase ++;</span>
              
-<span class="fc bfc" id="L296" title="All 2 branches covered.">             if (cont &lt; 5){</span>
-<span class="fc" id="L297">                   inicializaInimigos(4*cont,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_2.png&quot;);</span>
+<span class="nc bnc" id="L296" title="All 2 branches missed.">             if (cont &lt; 5){</span>
+<span class="nc" id="L297">                   inicializaInimigos(10*cont,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_2.png&quot;);</span>
 
              }
-<span class="fc bfc" id="L300" title="All 4 branches covered.">             if (cont&gt;=5 &amp;&amp; cont&lt; 10) {</span>
-<span class="fc" id="L301">                   inicializaInimigos(4*cont,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_2.png&quot;);</span>
-<span class="fc" id="L302">                   dificuldade=2;</span>
-<span class="fc" id="L303">                   ImageIcon referencia = new ImageIcon(&quot;imagem/fundo01.png&quot;);</span>
-<span class="fc" id="L304">		   fundo = referencia.getImage();</span>
+<span class="nc bnc" id="L300" title="All 4 branches missed.">             if (cont&gt;=5 &amp;&amp; cont&lt; 10) {</span>
+<span class="nc" id="L301">                   inicializaInimigos(10*cont,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_2.png&quot;);</span>
+<span class="nc" id="L302">                   dificuldade=2;</span>
+<span class="nc" id="L303">                   ImageIcon referencia = new ImageIcon(&quot;imagem/fundo01.png&quot;);</span>
+<span class="nc" id="L304">		   fundo = referencia.getImage();</span>
                 
                }
-<span class="fc bfc" id="L307" title="All 4 branches covered.">             if (cont&gt;=10 &amp;&amp; cont&lt;15) {</span>
-<span class="fc" id="L308">                    inicializaInimigos(4*cont,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_1.png&quot;);</span>
-<span class="fc" id="L309">                    dificuldade=2;</span>
-<span class="fc" id="L310">                    ImageIcon referencia = new ImageIcon(&quot;imagem/fundo02.png&quot;);</span>
-<span class="fc" id="L311">		    fundo = referencia.getImage();</span>
+<span class="nc bnc" id="L307" title="All 4 branches missed.">             if (cont&gt;=10 &amp;&amp; cont&lt;15) {</span>
+<span class="nc" id="L308">                    inicializaInimigos(10*cont,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_1.png&quot;);</span>
+<span class="nc" id="L309">                    dificuldade=2;</span>
+<span class="nc" id="L310">                    ImageIcon referencia = new ImageIcon(&quot;imagem/fundo02.png&quot;);</span>
+<span class="nc" id="L311">		    fundo = referencia.getImage();</span>
                }
-<span class="fc bfc" id="L313" title="All 4 branches covered.">             if (cont&gt;= 15 &amp;&amp; cont&lt;20) {</span>
-<span class="fc" id="L314">                    inicializaInimigos(4*cont,&quot;imagem/inimigo_1.png&quot;,&quot;imagem/inimigo_3.png&quot;);</span>
-<span class="fc" id="L315">                    dificuldade=3;</span>
-<span class="fc" id="L316">                    ImageIcon referencia = new ImageIcon(&quot;imagem/fundo03.png&quot;);</span>
-<span class="fc" id="L317">		    fundo = referencia.getImage();</span>
+<span class="nc bnc" id="L313" title="All 4 branches missed.">             if (cont&gt;= 15 &amp;&amp; cont&lt;20) {</span>
+<span class="nc" id="L314">                    inicializaInimigos(10*cont,&quot;imagem/inimigo_1.png&quot;,&quot;imagem/inimigo_3.png&quot;);</span>
+<span class="nc" id="L315">                    dificuldade=3;</span>
+<span class="nc" id="L316">                    ImageIcon referencia = new ImageIcon(&quot;imagem/fundo03.png&quot;);</span>
+<span class="nc" id="L317">		    fundo = referencia.getImage();</span>
                }
-<span class="fc bfc" id="L319" title="All 2 branches covered.">               if (cont &gt;=20){</span>
-<span class="fc" id="L320">                   inicializaInimigos(4*cont,&quot;imagem/inimigo_3.png&quot;,&quot;imagem/inimigo_4.png&quot;);</span>
-<span class="fc" id="L321">                   ImageIcon referencia = new ImageIcon(&quot;imagem/fundo04.png&quot;);</span>
-<span class="fc" id="L322">		   fundo = referencia.getImage();</span>
-<span class="fc" id="L323">                   dificuldade=4;</span>
+<span class="nc bnc" id="L319" title="All 2 branches missed.">               if (cont &gt;=20){</span>
+<span class="nc" id="L320">                   inicializaInimigos(10*cont,&quot;imagem/inimigo_3.png&quot;,&quot;imagem/inimigo_4.png&quot;);</span>
+<span class="nc" id="L321">                   ImageIcon referencia = new ImageIcon(&quot;imagem/fundo04.png&quot;);</span>
+<span class="nc" id="L322">		   fundo = referencia.getImage();</span>
+<span class="nc" id="L323">                   dificuldade=4;</span>
                }
                
-<span class="fc" id="L326">               return false;</span>
+<span class="nc" id="L326">               return false;</span>
             }
            
-<span class="fc" id="L329">        return true;</span>
+<span class="nc" id="L329">        return true;</span>
         
         }
 	public Boolean checarColisoes() {
@@ -395,7 +395,7 @@ public  class Fase extends JPanel implements ActionListener {
                             }
 <span class="nc" id="L396">                            emJogo = true;</span>
 <span class="nc" id="L397">                            record =0;</span>
-                            //nave = new Nave();
+<span class="nc" id="L398">                           nave = new Nave();</span>
 <span class="nc" id="L399">                            inicializaInimigos(10,&quot;imagem/inimigo_2.png&quot;,&quot;imagem/inimigo_2.png&quot;);</span>
 <span class="nc" id="L400">                            dificuldade=1;</span>
 <span class="nc" id="L401">                            vidas = 5;</span>
@@ -440,4 +440,4 @@ public  class Fase extends JPanel implements ActionListener {
         }
      
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -48,7 +48,7 @@ public class Nave extends Movimentavel{
 	//metodo para a nave não sair da tela
 	public Boolean mexer() {
             Boolean limite = true;
-		x += dx;
+		          x += dx;
 		y += dy;
 
 		if (this.x < 1) {
@@ -66,10 +66,6 @@ public class Nave extends Movimentavel{
 		if (this.y > 460) {
 			this.y = 460;
 		}
-                if ( this.y >460 || this.y<1 || this.x<1 || this.x>700 ){
-                limite =false;
-                
-                }
         return limite;
 	}
 
@@ -87,12 +83,8 @@ public class Nave extends Movimentavel{
                 this.misseis.add(new Missel(this.x + this.largura, this.y + this.altura/3  ));
                 
 	}
-	
-	//aqui são capturados os eventos referente ao teclado, o que faz a nave andar e atirar
-	public void keyPressed(KeyEvent tecla) {
-		int codigo = tecla.getKeyCode();
-
-		if (codigo == KeyEvent.VK_SPACE) {
+	public void teclaPress(int codigo){
+            if (codigo == KeyEvent.VK_SPACE) {
 			atira();
 		}
                 if (codigo == KeyEvent.VK_Q) {
@@ -121,6 +113,11 @@ public class Nave extends Movimentavel{
 		if (codigo == KeyEvent.VK_RIGHT) {
 			dx = 5;
 		}
+        }
+	//aqui são capturados os eventos referente ao teclado, o que faz a nave andar e atirar
+	public void keyPressed(KeyEvent tecla) {
+		int codigo = tecla.getKeyCode();
+                this.teclaPress(codigo);
 
 	}
 
