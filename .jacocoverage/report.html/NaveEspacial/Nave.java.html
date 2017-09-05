@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Nave.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Jogo&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">NaveEspacial</a> &gt; <span class="el_source">Nave.java</span></div><h1>Nave.java</h1><pre class="source lang-java linenums">package NaveEspacial;
+
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+
+public class Nave extends Movimentavel {
+    
+    private int dx, dy;
+    //Uma nave contem um array de misseis
+    private List&lt;Missel&gt; misseis;
+    private List&lt;Nave&gt; nave;
+<span class="fc" id="L17">    public int tiroespecial = 50;</span>
+    
+    public int getTiroespecial() {
+<span class="nc" id="L20">        return tiroespecial;</span>
+    }
+    
+    public Boolean AddTiroespecial() {
+<span class="nc" id="L24">        this.tiroespecial = getTiroespecial() + 5;</span>
+<span class="nc" id="L25">        return true;</span>
+    }
+    
+<span class="fc" id="L28">    public Nave() {</span>
+
+        //carregando a imagem da nave
+<span class="fc" id="L31">        ImageIcon referencia = new ImageIcon(&quot;imagem/nave.png&quot;);</span>
+        //capturando as dimensões da imagem
+<span class="fc" id="L33">        imagem = referencia.getImage();</span>
+<span class="fc" id="L34">        altura = imagem.getHeight(null);</span>
+<span class="fc" id="L35">        largura = imagem.getHeight(null);</span>
+
+        //iniciando o objeto
+<span class="fc" id="L38">        misseis = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L39">        nave = new ArrayList&lt;&gt;();</span>
+
+        //posicão inicial da nave
+<span class="fc" id="L42">        this.x = 1;</span>
+<span class="fc" id="L43">        this.y = 230;</span>
+        
+<span class="fc" id="L45">    }</span>
+
+    //metodo para a nave não sair da tela
+    public Boolean mexer() {
+<span class="fc" id="L49">        Boolean limite = true;</span>
+<span class="fc" id="L50">        x += dx;</span>
+<span class="fc" id="L51">        y += dy;</span>
+        
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (this.x &lt; 1) {</span>
+<span class="fc" id="L54">            this.x = 1;</span>
+<span class="fc" id="L55">            limite = false;</span>
+        }
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (this.x &gt; 700) {</span>
+<span class="fc" id="L58">            this.x = 1;</span>
+<span class="fc" id="L59">            limite = false;</span>
+            
+        }
+        
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (this.y &lt; 1) {</span>
+<span class="fc" id="L64">            this.y = 1;</span>
+<span class="fc" id="L65">            limite = false;</span>
+        }
+        
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (this.y &gt; 460) {</span>
+<span class="fc" id="L69">            this.y = 460;</span>
+<span class="fc" id="L70">            limite = false;</span>
+        }
+<span class="fc" id="L72">        return limite;</span>
+    }
+
+    /*metodo para atirar, aqui é criado um novo missel, e adicionado no array da nave, passando
+	as dimensões da nave, saindo proporcional a mesma
+     */
+    public void atira() {
+<span class="nc" id="L79">        this.misseis.add(new Missel(this.x + this.largura, this.y + this.altura</span>
+                / 3));
+        
+<span class="nc" id="L82">    }</span>
+
+    public void atiraespecial() {
+<span class="nc" id="L85">        this.misseis.add(new Missel(this.x + this.largura - 25, this.y + this.altura - 15));</span>
+<span class="nc" id="L86">        this.misseis.add(new Missel(this.x + this.largura - 23, this.y + this.altura - 60));</span>
+<span class="nc" id="L87">        this.misseis.add(new Missel(this.x + this.largura, this.y + this.altura / 3));</span>
+        
+<span class="nc" id="L89">    }</span>
+
+    public void teclaPress(int codigo) {
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        if (codigo == KeyEvent.VK_SPACE) {</span>
+<span class="nc" id="L93">            atira();</span>
+        }
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        if (codigo == KeyEvent.VK_Q) {</span>
+            
+<span class="nc bnc" id="L97" title="All 2 branches missed.">            if (this.tiroespecial &gt; 0) {</span>
+                
+<span class="nc" id="L99">                atiraespecial();</span>
+<span class="nc" id="L100">                this.tiroespecial--;</span>
+            }
+            
+        }
+        
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (codigo == KeyEvent.VK_UP) {</span>
+<span class="fc" id="L106">            dy = -5;</span>
+            
+        }
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (codigo == KeyEvent.VK_DOWN) {</span>
+<span class="fc" id="L110">            dy = 5;</span>
+        }
+        
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        if (codigo == KeyEvent.VK_LEFT) {</span>
+<span class="fc" id="L114">            dx = -5;</span>
+            
+        }
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (codigo == KeyEvent.VK_RIGHT) {</span>
+<span class="fc" id="L118">            dx = 5;</span>
+        }
+<span class="fc" id="L120">    }</span>
+    //aqui são capturados os eventos referente ao teclado, o que faz a nave andar e atirar
+
+    public void keyPressed(KeyEvent tecla) {
+<span class="nc" id="L124">        int codigo = tecla.getKeyCode();</span>
+<span class="nc" id="L125">        this.teclaPress(codigo);</span>
+        
+<span class="nc" id="L127">    }</span>
+    
+    public void keyReleased(KeyEvent tecla) {
+<span class="nc" id="L130">        int codigo = tecla.getKeyCode();</span>
+        
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        if (codigo == KeyEvent.VK_UP) {</span>
+<span class="nc" id="L133">            dy = 0;</span>
+            
+        }
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        if (codigo == KeyEvent.VK_DOWN) {</span>
+<span class="nc" id="L137">            dy = 0;</span>
+            
+        }
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        if (codigo == KeyEvent.VK_LEFT) {</span>
+<span class="nc" id="L141">            dx = 0;</span>
+            
+        }
+<span class="nc bnc" id="L144" title="All 2 branches missed.">        if (codigo == KeyEvent.VK_RIGHT) {</span>
+<span class="nc" id="L145">            dx = 0;</span>
+            
+        }
+        
+<span class="nc" id="L149">    }</span>
+
+    //aqui é criada uma dimensão retangular da nave, para ficar mais preciso, quanto tocar em outro objeto
+    public Rectangle getBounds() {
+<span class="nc" id="L153">        return new Rectangle(x, y, largura, altura);</span>
+        
+    }
+
+    //metodo para verificar se a nave está visivel ou não
+    public boolean isVisivel() {
+<span class="nc" id="L159">        return visible;</span>
+    }
+
+    //metodo para deixar a nave visivel ou não
+    public void setVisivel(boolean visible) {
+<span class="nc" id="L164">        this.visible = visible;</span>
+<span class="nc" id="L165">    }</span>
+
+    //retornando os misseis
+    public List&lt;Missel&gt; getMisseis() {
+<span class="nc" id="L169">        return misseis;</span>
+    }
+
+    //retornando a largura do movimento
+    public int getX() {
+<span class="nc" id="L174">        return x;</span>
+    }
+
+    //retornando a altura do movimento
+    public int getY() {
+<span class="nc" id="L179">        return y;</span>
+    }
+
+    //retornando a imagem
+    public Image getImagem() {
+<span class="nc" id="L184">        return imagem;</span>
+    }
+
+    //retornando a altura da nave
+    @Override
+    public int getAltura() {
+<span class="nc" id="L190">        return altura;</span>
+    }
+
+    //retornando a largura da nave
+    @Override
+    public int getLargura() {
+<span class="nc" id="L196">        return largura;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
