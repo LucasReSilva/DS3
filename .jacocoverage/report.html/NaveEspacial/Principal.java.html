@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Principal.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Jogo&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">NaveEspacial</a> &gt; <span class="el_source">Principal.java</span></div><h1>Principal.java</h1><pre class="source lang-java linenums">
-package NaveEspacial;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Principal.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Jogo&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">NaveEspacial</a> &gt; <span class="el_source">Principal.java</span></div><h1>Principal.java</h1><pre class="source lang-java linenums">package NaveEspacial;
 
 //classe que constroi os frames e menu, e inicia a fase.
-
-
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -20,99 +17,98 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 
-
 public class Principal extends JFrame {
-     private Telainicial tela ;
-     private Nave nave;
-     String  linha;
-      
-<span class="nc" id="L29">	public Principal(int i) throws IOException  {</span>
-<span class="nc" id="L30">     		constroiMenuBar();</span>
-<span class="nc" id="L31">		constroiFase();</span>
-<span class="nc" id="L32">                configuraTela();</span>
-<span class="nc" id="L33">            }</span>
-   
-            public static void main(String[] args) throws FileNotFoundException, IOException  {
-                  
-<span class="nc" id="L37">            new Telainicial().show();</span>
-<span class="nc" id="L38">  	}</span>
 
-	private JMenuBar constroiMenuBar() {
+    private Telainicial tela;
+    private Nave nave;
+    String linha;
 
-<span class="nc" id="L42">		JMenuBar menuBar = new JMenuBar();</span>
-<span class="nc" id="L43">		JMenu menu = new JMenu(&quot;Opcoes&quot;);</span>
-<span class="nc" id="L44">		JMenuItem sobre = new JMenuItem(&quot;Sobre&quot;);</span>
-<span class="nc" id="L45">		sobre.addActionListener(new ActionListener() {</span>
-			public void actionPerformed(ActionEvent e) {
-<span class="nc" id="L47">				JOptionPane.showMessageDialog(null,</span>
-						&quot;Projeto de POO UFS 2015 \nProf: Alberto Costa Neto \nAluno: Brenno Santana Soares\n\n&quot;
-                                                   +&quot;       Comandos do jogo: \n&quot;     
-                                                 + &quot;Use a setas para guiar a nave \n Espaço &quot;
-                                                        +&quot;para tiros Normais \n'Q' para tiros especiais\n &quot;
-                                                        +&quot;Enter para reniciar \n&quot;+&quot;          Bom jogo!!&quot;,
-						&quot;Informacoes&quot;, JOptionPane.INFORMATION_MESSAGE);
+<span class="nc" id="L26">    public Principal(int i) throws IOException {</span>
+<span class="nc" id="L27">        constroiMenuBar();</span>
+<span class="nc" id="L28">        constroiFase();</span>
+<span class="nc" id="L29">        configuraTela();</span>
+<span class="nc" id="L30">    }</span>
 
-<span class="nc" id="L55">			}</span>
-		});
+    public static void main(String[] args) throws FileNotFoundException, IOException {
 
-<span class="nc" id="L58">		JMenuItem sair = new JMenuItem(&quot;Sair&quot;);</span>
-<span class="nc" id="L59">		sair.addActionListener(new ActionListener() {</span>
-			
-			public void actionPerformed(ActionEvent e) {
-<span class="nc" id="L62">				System.exit(0);</span>
+<span class="nc" id="L34">        new Telainicial().show();</span>
+<span class="nc" id="L35">    }</span>
 
-<span class="nc" id="L64">			}</span>
-                        
-              
-		});
-<span class="nc" id="L68">                JMenuItem record = new JMenuItem(&quot;Novo Jogo&quot;);</span>
-<span class="nc" id="L69">		record.addActionListener(new ActionListener() {</span>
-			
-			public void actionPerformed(ActionEvent e) {
-                         
-                            try {
-<span class="nc" id="L74">                                new Telainicial().show();</span>
-<span class="nc" id="L75">                                dispose();</span>
-<span class="nc" id="L76">                            } catch (IOException ex) {</span>
-<span class="nc" id="L77">                                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);</span>
-<span class="nc" id="L78">                            }</span>
-<span class="nc" id="L79">			}</span>
-			
-                        
-              
-		});
+    private JMenuBar constroiMenuBar() {
 
-<span class="nc" id="L85">		menu.add(sobre);</span>
-<span class="nc" id="L86">		menu.add(new JSeparator());</span>
-<span class="nc" id="L87">		menu.add(sair);</span>
-<span class="nc" id="L88">                menu.add(new JSeparator());</span>
-<span class="nc" id="L89">                menu.add(record);</span>
-<span class="nc" id="L90">		menuBar.add(menu);</span>
-<span class="nc" id="L91">		setJMenuBar(menuBar);</span>
-<span class="nc" id="L92">		return menuBar;</span>
+<span class="nc" id="L39">        JMenuBar menuBar = new JMenuBar();</span>
+<span class="nc" id="L40">        JMenu menu = new JMenu(&quot;Opcoes&quot;);</span>
+<span class="nc" id="L41">        JMenuItem sobre = new JMenuItem(&quot;Sobre&quot;);</span>
+<span class="nc" id="L42">        sobre.addActionListener(new ActionListener() {</span>
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L44">                JOptionPane.showMessageDialog(null,</span>
+                        &quot;Projeto de POO UFS 2015 \nProf: Alberto Costa Neto \nAluno: Brenno Santana Soares\n\n&quot;
+                        + &quot;       Comandos do jogo: \n&quot;
+                        + &quot;Use a setas para guiar a nave \n Espaço &quot;
+                        + &quot;para tiros Normais \n'Q' para tiros especiais\n &quot;
+                        + &quot;Enter para reniciar \n&quot; + &quot;          Bom jogo!!&quot;,
+                        &quot;Informacoes&quot;, JOptionPane.INFORMATION_MESSAGE);
 
-	}
+<span class="nc" id="L52">            }</span>
+        });
 
-	private JPanel constroiFase() throws IOException {
-<span class="nc" id="L97">		Fase fase = new Fase(1);</span>
-<span class="nc" id="L98">		add(fase); </span>
-<span class="nc" id="L99">		return fase;</span>
+<span class="nc" id="L55">        JMenuItem sair = new JMenuItem(&quot;Sair&quot;);</span>
+<span class="nc" id="L56">        sair.addActionListener(new ActionListener() {</span>
 
-	}
-        private JPanel Telainicial(){
-            
-<span class="nc" id="L104">            return null;</span>
-        
-        }
-	private void configuraTela() {
-<span class="nc" id="L108">		setSize(800, 570);</span>
-<span class="nc" id="L109">		setResizable(false);</span>
-<span class="nc" id="L110">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
-<span class="nc" id="L111">		setLocationRelativeTo(null);</span>
-<span class="nc" id="L112">		setVisible(true);</span>
-<span class="nc" id="L113">		setTitle(&quot;Guerra no Espaço&quot;);</span>
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L59">                System.exit(0);</span>
 
-<span class="nc" id="L115">	}</span>
+<span class="nc" id="L61">            }</span>
+
+        });
+<span class="nc" id="L64">        JMenuItem record = new JMenuItem(&quot;Novo Jogo&quot;);</span>
+<span class="nc" id="L65">        record.addActionListener(new ActionListener() {</span>
+
+            public void actionPerformed(ActionEvent e) {
+
+                try {
+<span class="nc" id="L70">                    new Telainicial().show();</span>
+<span class="nc" id="L71">                    dispose();</span>
+<span class="nc" id="L72">                } catch (IOException ex) {</span>
+<span class="nc" id="L73">                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L74">                }</span>
+<span class="nc" id="L75">            }</span>
+
+        });
+
+<span class="nc" id="L79">        menu.add(sobre);</span>
+<span class="nc" id="L80">        menu.add(new JSeparator());</span>
+<span class="nc" id="L81">        menu.add(sair);</span>
+<span class="nc" id="L82">        menu.add(new JSeparator());</span>
+<span class="nc" id="L83">        menu.add(record);</span>
+<span class="nc" id="L84">        menuBar.add(menu);</span>
+<span class="nc" id="L85">        setJMenuBar(menuBar);</span>
+<span class="nc" id="L86">        return menuBar;</span>
+
+    }
+
+    private JPanel constroiFase() throws IOException {
+<span class="nc" id="L91">        Fase fase = new Fase(1);</span>
+<span class="nc" id="L92">        add(fase);</span>
+<span class="nc" id="L93">        return fase;</span>
+
+    }
+
+    private JPanel Telainicial() {
+
+<span class="nc" id="L99">        return null;</span>
+
+    }
+
+    private void configuraTela() {
+<span class="nc" id="L104">        setSize(800, 570);</span>
+<span class="nc" id="L105">        setResizable(false);</span>
+<span class="nc" id="L106">        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L107">        setLocationRelativeTo(null);</span>
+<span class="nc" id="L108">        setVisible(true);</span>
+<span class="nc" id="L109">        setTitle(&quot;Guerra no Espaço&quot;);</span>
+
+<span class="nc" id="L111">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
